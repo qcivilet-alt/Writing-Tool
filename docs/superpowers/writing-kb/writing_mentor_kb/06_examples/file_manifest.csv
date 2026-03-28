@@ -1,0 +1,42 @@
+guide_id,title,doc_type,path
+MODE.CHECKPOINT_LOGIC,Checkpoint Logic,control,00_control/MODE.CHECKPOINT_LOGIC.md
+MODE.INTENSITY_CONTROL,Intensity Control,control,00_control/MODE.INTENSITY_CONTROL.md
+MODE.PROBLEM_CLASSIFIER,Problem Classifier,control,00_control/MODE.PROBLEM_CLASSIFIER.md
+MODE.STAGE_DETECTION,Stage Detection,control,00_control/MODE.STAGE_DETECTION.md
+ROUTER.CHARACTER,Character Router,router,01_routing_cards/ROUTER.CHARACTER.md
+ROUTER.DIALOGUE,Dialogue Router,router,01_routing_cards/ROUTER.DIALOGUE.md
+ROUTER.REVISION,Revision Router,router,01_routing_cards/ROUTER.REVISION.md
+ROUTER.SCENE,Scene Router,router,01_routing_cards/ROUTER.SCENE.md
+ROUTER.STRUCTURE,Structure Router,router,01_routing_cards/ROUTER.STRUCTURE.md
+GUIDE.CHARACTER.AGENCY_AND_DECISION_PRESSURE,Agency and Decision Pressure,leaf_guide,02_leaf_guides/character/GUIDE.CHARACTER.AGENCY_AND_DECISION_PRESSURE.md
+GUIDE.CHARACTER.WANT_NEED_MISBELIEF,Want, Need, and Misbelief,leaf_guide,02_leaf_guides/character/GUIDE.CHARACTER.WANT_NEED_MISBELIEF.md
+GUIDE.CONTINUITY.KNOWLEDGE_AND_TIMELINE,Continuity: Knowledge and Timeline,leaf_guide,02_leaf_guides/continuity/GUIDE.CONTINUITY.KNOWLEDGE_AND_TIMELINE.md
+GUIDE.DIALOGUE.SUBTEXT_AND_MULTI_FUNCTION,Dialogue: Subtext and Multi-function,leaf_guide,02_leaf_guides/dialogue/GUIDE.DIALOGUE.SUBTEXT_AND_MULTI_FUNCTION.md
+GUIDE.EXPOSITION.TIMING_AND_RELEVANCE,Exposition Timing and Relevance,leaf_guide,02_leaf_guides/exposition/GUIDE.EXPOSITION.TIMING_AND_RELEVANCE.md
+GUIDE.PLOT.CAUSAL_ESCALATION,Plot Causal Escalation,leaf_guide,02_leaf_guides/plot/GUIDE.PLOT.CAUSAL_ESCALATION.md
+GUIDE.PREMISE.VIABILITY,Premise Viability,leaf_guide,02_leaf_guides/premise/GUIDE.PREMISE.VIABILITY.md
+GUIDE.REPRESENTATION.STEREOTYPE_RISK,Representation and Stereotype Risk,leaf_guide,02_leaf_guides/representation/GUIDE.REPRESENTATION.STEREOTYPE_RISK.md
+GUIDE.REVISION.TRIAGE,Revision Triage,leaf_guide,02_leaf_guides/revision/GUIDE.REVISION.TRIAGE.md
+GUIDE.RIPPLE.REVISION_DEPENDENCIES,Revision Dependencies,leaf_guide,02_leaf_guides/ripple/GUIDE.RIPPLE.REVISION_DEPENDENCIES.md
+GUIDE.SCENE.PURPOSE_AND_TURN,Scene Purpose and Turn,leaf_guide,02_leaf_guides/scene/GUIDE.SCENE.PURPOSE_AND_TURN.md
+GUIDE.SCENE.SCENE_AND_SEQUEL,Scene and Sequel,leaf_guide,02_leaf_guides/scene/GUIDE.SCENE.SCENE_AND_SEQUEL.md
+GUIDE.STRUCTURE.CLIMACTIC_MOMENT,Climactic Moment,leaf_guide,02_leaf_guides/structure/GUIDE.STRUCTURE.CLIMACTIC_MOMENT.md
+GUIDE.STRUCTURE.FOUR_WORLDS,Four Metaphoric Worlds,leaf_guide,02_leaf_guides/structure/GUIDE.STRUCTURE.FOUR_WORLDS.md
+GUIDE.STRUCTURE.KEY_EVENT_VS_INCITING_VS_FIRST_PLOT_POINT,Key Event vs Inciting Event vs First Plot Point,leaf_guide,02_leaf_guides/structure/GUIDE.STRUCTURE.KEY_EVENT_VS_INCITING_VS_FIRST_PLOT_POINT.md
+GUIDE.STRUCTURE.LINKED_CHIASTIC,Linked / Chiastic Structure,leaf_guide,02_leaf_guides/structure/GUIDE.STRUCTURE.LINKED_CHIASTIC.md
+GUIDE.STRUCTURE.MIDPOINT_SHIFT,Midpoint Shift,leaf_guide,02_leaf_guides/structure/GUIDE.STRUCTURE.MIDPOINT_SHIFT.md
+GUIDE.STRUCTURE.PINCH_POINTS,Pinch Points,leaf_guide,02_leaf_guides/structure/GUIDE.STRUCTURE.PINCH_POINTS.md
+GUIDE.STRUCTURE.THIRD_PLOT_POINT,Third Plot Point,leaf_guide,02_leaf_guides/structure/GUIDE.STRUCTURE.THIRD_PLOT_POINT.md
+GUIDE.STRUCTURE.TWO_HALVES_MAJOR_BEATS,Two Halves of Major Beats,leaf_guide,02_leaf_guides/structure/GUIDE.STRUCTURE.TWO_HALVES_MAJOR_BEATS.md
+GUIDE.STRUCTURE.WEILAND_BEAT_MAP,Weiland Beat Map,leaf_guide,02_leaf_guides/structure/GUIDE.STRUCTURE.WEILAND_BEAT_MAP.md
+GUIDE.THEME.THEMATIC_ARGUMENT,Thematic Argument,leaf_guide,02_leaf_guides/theme/GUIDE.THEME.THEMATIC_ARGUMENT.md
+CHK.CONTINUITY.TIMELINE,Continuity Timeline Checklist,checklist,03_checklists/continuity/CHK.CONTINUITY.TIMELINE.md
+CHK.PREMISE.VIABILITY,Premise Viability Checklist,checklist,03_checklists/premise/CHK.PREMISE.VIABILITY.md
+CHK.REPRESENTATION.STEREOTYPE_RISK,Representation / Stereotype Risk Checklist,checklist,03_checklists/representation/CHK.REPRESENTATION.STEREOTYPE_RISK.md
+CHK.REVISION.TRIAGE,Revision Triage Checklist,checklist,03_checklists/revision/CHK.REVISION.TRIAGE.md
+CHK.SCENE.DIALOGUE_FUNCTION,Dialogue Function Checklist,checklist,03_checklists/scene/CHK.SCENE.DIALOGUE_FUNCTION.md
+CHK.SCENE.PURPOSE,Scene Purpose Checklist,checklist,03_checklists/scene/CHK.SCENE.PURPOSE.md
+MEMO.SHOW_DONT_TELL.EXCEPTIONS,Show vs Tell and Its Exceptions,comparative_memo,04_comparative_memos/structure/MEMO.SHOW_DONT_TELL.EXCEPTIONS.md
+MEMO.STRUCTURE.COMPARATIVE_FRAMEWORKS,Comparative Structure Frameworks,comparative_memo,04_comparative_memos/structure/MEMO.STRUCTURE.COMPARATIVE_FRAMEWORKS.md
+MAP.CONTINUITY.LEDGER_TEMPLATE,Continuity Ledger Template,dependency_map,05_dependency_maps/MAP.CONTINUITY.LEDGER_TEMPLATE.md
+MAP.RIPPLE.CORE_CHANGE_MAP,Core Change Ripple Map,dependency_map,05_dependency_maps/MAP.RIPPLE.CORE_CHANGE_MAP.md
