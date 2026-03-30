@@ -4,12 +4,20 @@
 
 **Goal:** Build the prose-editor skill (Phase 1 — editorial core) with voice profile system, concern-based dispatch, five-pass review protocol (passes 3-5 active, 1-2 stubbed), and integration with writing-guide routing.
 
-**Architecture:** prose-editor is a Claude skill at `~/.claude/skills/prose-editor/` with SKILL.md (~430 lines) and 4 reference files. It integrates with writing-guide via updated routing entries and escalation payloads. Two new KB leaf guides extend the existing writing-kb. All prose quality detection is consolidated from the Claude Prose Editing Toolkit into adapted reference files.
+**Architecture:** prose-editor is a Claude skill at `~/.claude/skills/prose-editor/` with SKILL.md (~430 lines) and 4 reference files. It integrates with writing-guide via updated routing entries and escalation payloads. Three new KB leaf guides extend the existing writing-kb. All prose quality detection is consolidated from the Claude Prose Editing Toolkit into adapted reference files, enriched with research-backed patterns from two additional sources.
 
 **Tech Stack:** Claude skills (markdown-based), YAML frontmatter, JSON escalation payloads, file-based artifacts
 
 **Spec:** `docs/superpowers/specs/2026-03-29-prose-editor-design.md`
 **Brainstorm:** `docs/superpowers/specs/2026-03-29-prose-editor-brainstorm.md`
+**Integration evaluation:** `humming-wobbling-perlis.md` (plan file in hungry-edison worktree)
+
+**Source materials (3):**
+- Claude Prose Editing Toolkit (Modules 1-9) — base detection patterns
+- "Writing Style in Fantasy and Science Fiction: A Comprehensive Craft Synthesis" (Paper A) — SFF failure modes, psychic distance diagnostic, genre calibration profiles
+- "The craft of not sounding like a machine" (Paper B) — evidence-typed AI-pattern taxonomy, burstiness metric, overcorrection traps, 5 diagnostic questions
+
+Inline source tags (`<!-- Source: Paper A/B §N -->`) trace each addition to its origin.
 
 ---
 
@@ -190,7 +198,7 @@ Load only sub-modules matching the active dispatch concern tag.
 
 - [ ] **Step 2: Write Sub-Module 1 — AI-ism Detection**
 
-Adapt Toolkit Module 1 into a detection checklist. Include:
+Adapt Toolkit Module 1 into a detection checklist, enriched with evidence-typed patterns from the "Craft of not sounding like a machine" research paper. Include:
 - AI cliche phrases catalog (the full list from Module 1)
 - Structural patterns (uniform paragraph length, formulaic templates)
 - Hedging/weasel patterns
@@ -199,7 +207,23 @@ Adapt Toolkit Module 1 into a detection checklist. Include:
 - Punctuation tells (em dashes >3 per 1000 words)
 - Severity guidance per pattern category
 
+**Additional patterns from research (tag each with evidence type [A/O/E/S]):**
+- Zombie diction word list — verbs: delve, leverage, utilize, harness, streamline, underscore, navigate, foster, elevate, embark; adjectives: pivotal, robust, innovative, seamless, intricate, multifaceted, meticulous; nouns: landscape, realm, tapestry, synergy, testament, beacon; filler phrases: "It's important to note that," "In today's fast-paced world," "In the realm of" [O][S] (Kobak et al. PubMed study; Max Planck Institute confirmation of 50%+ post-2022 spike)
+- Participial construction overuse — main clause + comma + -ing verb phrase at 2-5x human rate [O][S] (PNAS study on instruction-tuned models)
+- Contrastive reframe — "It's not X, it's Y" as pervasive AI structural tic [O][E]
+- Rule-of-three abuse — tricolon in every list without variation in cadence [O][E]
+- Em-dash overuse — the "ChatGPT dash"; probabilistic shortcut for syntactic complexity [O][E]
+- Elegant variation / synonym cycling — unnatural synonym rotation to avoid repetition ("the protagonist" → "the key player" → "the eponymous character") [O][E]
+- Shallow specificity — prose that appears concrete but is actually generic ("gentle breeze" = "breeze-like breeze") [O][E]
+- Spectral sensory language — ghostly imagery where everything is "a shadow, or a memory, or a whisper"; sensory language attached to the immaterial [O]
+- Absent perspective — perpetual balance, no genuine stance; engagement markers at 3x lower rate than human writing [O][S] (Jiang & Hyland 2025 study)
+- Retail voice — customer-service tone, overly helpful, excessively neutral, devoid of sharp edges [O][E]
+- Manufactured drama — artificial tension ("But here's the truth," "Then I realized:") in mundane contexts [O][E]
+
+**Diagnostic note:** The signal is **accumulation**, not individual occurrences. Any single AI-associated word may appear in good human prose. Multiple patterns clustered together are diagnostic.
+
 Do NOT include prompts or "[paste text here]" placeholders. Adapt from prompt format into reference checklist format.
+<!-- Source: Toolkit Module 1 (base); Paper B §2 (enrichments) -->
 
 - [ ] **Step 3: Write Sub-Module 2 — Sentence Variation Analysis**
 
@@ -210,6 +234,11 @@ Adapt Toolkit Module 2:
 - Passive voice thresholds (>15% in non-academic)
 - Paragraph rhythm assessment criteria
 - Verdict scale (Dynamic / Repetitive / Monotone)
+
+**Burstiness metric (research-backed):**
+- Calculate sentence-length standard deviation across the submitted passage. A standard deviation ≥ 8 words indicates healthy variation (human-like burstiness). Low standard deviation (tight clustering of sentence lengths) is the most robustly documented AI stylistic signal. [O][S] (O'Sullivan 2025, *Humanities and Social Sciences Communications* / Nature: "Human-authored texts form broader, more heterogeneous clusters; LLM outputs display a higher degree of stylistic uniformity, clustering tightly by model.")
+- Include burstiness assessment in the verdict scale: Dynamic (high burstiness) / Repetitive (moderate burstiness) / Monotone (low burstiness, uniform lengths)
+<!-- Source: Paper B §2, "Low burstiness" -->
 
 - [ ] **Step 4: Write Sub-Module 3 — Diction & Specificity Audit**
 
@@ -296,6 +325,16 @@ How prose-editor uses the voice profile during Pass 3:
 - Reference character voice anchors when available (from character files)
 - Multi-POV handling: document the protocol (writer-annotated POV sections apply per-character anchors) but note it is Phase 1 documentation only — annotation detection logic is not required until writers request it
 
+**Psychic distance diagnostic (research-backed):**
+Unintentional psychic distance shifts can register as voice drift. Include Card's 4-level psychic distance scale as a diagnostic reference during Pass 3:
+- **Level 1 (Distant/Omniscient):** "The city had been at war for three years." — Useful for orientation, scope, transitions.
+- **Level 2 (Cinematic):** "Kael walked through the market, stepping over broken flagstones." — External observation, no interiority.
+- **Level 3 (Light penetration):** "Kael noticed the market seemed quieter than usual. Something felt wrong." — Filtered through character awareness.
+- **Level 4 (Deep penetration):** "Too quiet. The market never went silent, not even during the plague. Where was everyone?" — Character's direct experience, no filter words.
+
+**Application:** When voice drift is detected, map the psychic distance of flagged passages. Verify distance shifts are intentional and serve the scene's emotional arc. Most scenes should start at Level 2-3 for orientation and move to Level 4 for emotional peaks. An unintentional drop from Level 4 to Level 2 mid-scene often reads as voice drift even when vocabulary and rhythm are consistent.
+<!-- Source: Paper A §8, Card's 4-level psychic distance scale -->
+
 - [ ] **Step 5: Commit**
 
 ```bash
@@ -324,6 +363,19 @@ For each of the 5 passes:
 - Severity assignment rules
 - Genre/audience calibration rules
 
+**Pass 5 preamble — 5 diagnostic questions (research-backed):**
+Before running individual Pass 5 sub-modules, apply these 5 quick-scan questions to the submitted passage:
+1. **Is anyone home?** — Can you detect a specific person making specific choices, or could this have been written by anyone about anything?
+2. **Can you see anything?** — Is the language anchored in visible, physical reality, or does it float in abstraction?
+3. **Does it vary?** — Do sentence lengths, structures, and rhythms change, or does the prose hum at one frequency?
+4. **Does it take a position?** — Does the writer commit to a stance, or present permanent hedged neutrality?
+5. **Does anything surprise?** — Is there a single phrase, image, or structural choice you didn't see coming?
+
+If all 5 answers are negative, note in the review artifact as a meta-diagnostic finding (Flag severity): "Passage registers as uniformly weak across all quality dimensions. Consider `full-review` concern tag for comprehensive analysis."
+
+This preamble adds ~10 lines to the review protocol and does not interfere with dispatch logic — it runs after dispatch selects sub-modules but before sub-module execution begins.
+<!-- Source: Paper B §7, "The five diagnostic questions" -->
+
 - [ ] **Step 3: Write review artifact write protocol**
 
 When findings are written to disk (after each pass for checkpoint/recovery).
@@ -340,6 +392,17 @@ Adapted from Toolkit Module 9:
 - Inserted AI-isms check
 - Iteration assessment (issues resolved, new issues introduced, severity improvement)
 - 3-pass iteration limit with over-editing warning
+
+**Over-correction check (research-backed):**
+Writers responding to AI-pattern findings may overcorrect, producing prose that is worse in different ways. Include these 5 sub-checks, all flagged as Advisory severity:
+1. **Forced quirkiness** — Has the writer added performative personality (Zinsser's "toupee" — style added on top rather than emerging from within)? [A]
+2. **Gratuitous sensory detail** — Has the writer stuffed in "showing" without narrative function? Description must serve purpose (mood, characterization, foreshadowing), not just exist. [A][E]
+3. **Deliberately choppy prose** — Has the writer overcorrected toward uniformly short sentences? Rhythm requires variation, not staccato. [A]
+4. **Purple prose as proof of humanity** — Has the writer added ornament without purpose to distinguish from AI? "Purple prose covers up a lack of depth." [A][E]
+5. **Deliberately inserted errors** — Has the writer added typos or grammatical mistakes to appear human? "Performing imperfection is itself a form of inauthenticity." [O][E]
+
+**Diagnostic principle:** Every false solution attempts to simulate the artifacts of authenticity without the substance underneath. The solution is never cosmetic — it is having something specific to say and the craft to say it precisely.
+<!-- Source: Paper B §9, "False solutions and the overcorrection trap" -->
 
 - [ ] **Step 5: Write continuity check protocol (Phase 1 — read-only)**
 
@@ -398,6 +461,7 @@ git commit -m "feat: add dispatch-and-escalation.md (routing + payloads)"
 **Files:**
 - Create: `docs/superpowers/writing-kb/writing_mentor_kb/02_leaf_guides/prose/GUIDE.PROSE.AI_PATTERN_DETECTION.md`
 - Create: `docs/superpowers/writing-kb/writing_mentor_kb/02_leaf_guides/prose/GUIDE.PROSE.VOICE_CONSISTENCY.md`
+- Create: `docs/superpowers/writing-kb/writing_mentor_kb/02_leaf_guides/prose/GUIDE.PROSE.SFF_FAILURE_MODES.md`
 
 - [ ] **Step 1: Create prose subdirectory**
 
@@ -442,11 +506,43 @@ Content: craft-oriented guide covering:
 - When voice inconsistency is a problem vs. intentional modulation
 - When to use prose-editor for voice analysis
 
+- [ ] **Step 3.5: Write GUIDE.PROSE.SFF_FAILURE_MODES.md**
+
+YAML frontmatter:
+```yaml
+---
+guide_id: GUIDE.PROSE.SFF_FAILURE_MODES
+title: SFF Prose Failure Modes
+doc_type: leaf_guide
+topic: prose
+---
+```
+
+Content: craft-oriented guide distilling the 13 most common SFF prose failure modes from the "Writing Style in Fantasy and Science Fiction" research paper. Each failure mode includes a diagnostic sign and editorial action adapted for the KB format. Covers:
+
+1. **Infodumping / Expository Lumps** — paragraphs of worldbuilding with no character action or emotional engagement. Break into fragments; attach each to a character action. <!-- Source: Paper A §8, failure mode 1 -->
+2. **"As You Know, Bob" dialogue** — characters telling each other things they already know. Remove and find a different delivery vehicle. <!-- Source: Paper A §8, failure mode 2 -->
+3. **Head-hopping / POV violations** — reporting thoughts of non-POV characters. Identify single POV per scene; remove unperceivable information. <!-- Source: Paper A §8, failure mode 3 -->
+4. **Purple prose** — ornate language that is decorative rather than meaningful. Apply Le Guin's Chastity test: does it serve the story? <!-- Source: Paper A §8, failure mode 4 -->
+5. **Filter words / psychic distance errors** — "He felt his toe catch" instead of "His toe caught." Search and remove unnecessary filters. <!-- Source: Paper A §8, failure mode 5 -->
+6. **Inconsistent register** — mixing modern slang with archaic language without character justification. Define register per POV character; audit against it. <!-- Source: Paper A §8, failure mode 6 -->
+7. **White room syndrome** — dialogue or action with no environmental grounding. Ground each scene opening in concrete sensory detail (Sanderson's Pyramid). <!-- Source: Paper A §8, failure mode 7 -->
+8. **Said bookisms** — creative dialogue tags replacing "said." Replace with "said" or action beats. <!-- Source: Paper A §8, failure mode 8 -->
+9. **Weak verbs / passive voice in action** — passive constructions in high-tension scenes. Convert to active voice. <!-- Source: Paper A §8, failure mode 9 -->
+10. **Front-loaded exposition** — opening chapters dominated by backstory before any character is onstage. Get characters onstage first; weave backstory through experience. <!-- Source: Paper A §8, failure mode 10 -->
+11. **Faux-archaic dialogue** — inconsistent "thee/thou" or stilted grandiloquent speech. Remove unless consistent, purposeful, and character-specific. <!-- Source: Paper A §8, failure mode 11 -->
+12. **Pacing collapse through over-crowding** — every scene exhaustively described. Apply Le Guin's "leaping" principle: identify trajectory, cut everything not on it. <!-- Source: Paper A §8, failure mode 12 -->
+13. **Subgenre style mismatch** — epic-fantasy exposition in a sword-and-sorcery story; grimdark cynicism in mythic fantasy. Audit prose against target subgenre conventions. <!-- Source: Paper A §8, failure mode 13 -->
+
+**Important:** Editorial actions describe *categories* of fixes, not specific textual corrections. This guide teaches the writer what to look for; prose-editor's diagnostic passes detect it. The guide is routable from ROUTER.REVISION when the genre is speculative fiction and the symptom involves SFF-specific prose issues.
+
+Est. ~120 lines.
+
 - [ ] **Step 4: Commit**
 
 ```bash
 git add docs/superpowers/writing-kb/writing_mentor_kb/02_leaf_guides/prose/
-git commit -m "feat: add KB leaf guides for AI patterns and voice consistency"
+git commit -m "feat: add KB leaf guides for AI patterns, voice consistency, and SFF failure modes"
 ```
 
 ### Task 7: Update ROUTER.REVISION.md
@@ -465,6 +561,7 @@ Add to the Optional section (these are secondary loads, not primary revision too
 ```
 - GUIDE.PROSE.AI_PATTERN_DETECTION (when symptom involves AI-sounding prose or generic voice)
 - GUIDE.PROSE.VOICE_CONSISTENCY (when symptom involves lost voice, flat tone, or voice drift)
+- GUIDE.PROSE.SFF_FAILURE_MODES (when genre is speculative fiction and symptom involves infodumping, AYKB dialogue, register breaks, head-hopping, white room, pacing collapse, or subgenre style mismatch)
 ```
 
 Follow existing format — no `.md` extension in routing entry names.
