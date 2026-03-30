@@ -83,13 +83,15 @@ Help writers evaluate and improve their drafted prose through structured diagnos
 
 ### Concern-to-Pass Dispatch Map
 
-| Concern Tag | Passes Run | Pass Order |
+The six sub-modules within Pass 5 (Prose Quality) are: (1) AI-ism Detection, (2) Sentence Variation Analysis, (3) Diction & Specificity Audit, (4) Cliche & Dead Metaphor Scanner, (5) Echo & Repetition Detector, (6) Readability & Pacing Check.
+
+| Concern Tag | Passes Activated | Pass 5 Sub-Modules Activated |
 |---|---|---|
-| `sounds-too-ai` | Prose Quality (AI-ism focus), Diction Audit, Voice Coherence | 5, 3 |
-| `needs-tightening` | Prose Quality (diction focus), Cliche Scan, Echo Detection | 5 |
-| `rhythm-off` | Prose Quality (rhythm focus), Echo Detection, Readability/Pacing | 5 |
-| `full-review` | All five passes | 1, 2, 3, 4, 5 (recommended) |
-| `quick-polish` | Prose Quality (combined lint, compact), top 5 findings only | 5 |
+| `sounds-too-ai` | Pass 5, Pass 3 (Voice Coherence) | AI-ism Detection (full), Diction Audit (compact), Sentence Variation (compact) |
+| `needs-tightening` | Pass 5 | Diction Audit (full), Cliche Scanner (compact), Echo Detection (compact) |
+| `rhythm-off` | Pass 5 | Sentence Variation (full), Echo Detection (compact), Readability/Pacing (if fiction/long-form) |
+| `full-review` | All five passes (1, 2, 3, 4, 5) | All six sub-modules (full reference versions) |
+| `quick-polish` | Pass 5 | All six sub-modules (compact versions), capped at top 5 findings |
 
 **Phase note:** Passes 1 (structural alignment) and 2 (character consistency) only run when planning artifacts are available AND Phase 2 is implemented. In Phase 1 or context-only mode, these passes are skipped with a declaration in the review artifact.
 
@@ -125,13 +127,13 @@ Help writers evaluate and improve their drafted prose through structured diagnos
 
 **Dispatch logic (in SKILL.md):**
 
-The writer selects a concern tag at intake. The dispatch map determines which passes and which sub-modules within Pass 5 (Prose Quality) activate:
+The writer selects a concern tag at intake. The dispatch map (see Section 2) determines which passes and which sub-modules within Pass 5 (Prose Quality) activate:
 
-- `sounds-too-ai` — AI-ism Detection (full), Diction Audit (compact), Sentence Variation (compact)
-- `needs-tightening` — Diction Audit (full), Cliche Scanner (compact), Echo Detection (compact)
-- `rhythm-off` — Sentence Variation (full), Echo Detection (compact), Readability/Pacing (if fiction/long-form)
-- `full-review` — Full Prose Lint (all sub-modules, full reference versions)
-- `quick-polish` — Full Prose Lint (compact version), capped at top 5 highest-severity findings
+- `sounds-too-ai` — Pass 5 (AI-ism Detection full, Diction Audit compact, Sentence Variation compact) + Pass 3 (Voice Coherence)
+- `needs-tightening` — Pass 5 (Diction Audit full, Cliche Scanner compact, Echo Detection compact)
+- `rhythm-off` — Pass 5 (Sentence Variation full, Echo Detection compact, Readability/Pacing if fiction/long-form)
+- `full-review` — All five passes; Pass 5 runs all six sub-modules in full reference versions
+- `quick-polish` — Pass 5 only (all six sub-modules, compact versions), capped at top 5 highest-severity findings
 
 **Sub-module loading:** Pass 5's reference file (`prose-lint-modules.md`) contains all six sub-modules consolidated. Dispatch determines which sub-modules activate — unused sub-modules are not processed, preserving context budget.
 
@@ -402,7 +404,7 @@ When a writer says "just fix it" or "rewrite this for me," prose-editor responds
 **Schema authority:** The handoff-context.json schema is defined authoritatively in story-architect's `references/artifact-schemas.md`. prose-editor consumes this contract; it does not define it.
 
 **When entering with handoff:**
-1. Locate latest `handoff-context-v[N].json` in `docs/writing/[project]/handoff/`
+1. Locate latest `handoff-context-v[N].json` in `docs/writing/[project]/handoff/` (latest = highest version number N by filename sort)
 2. Validate `schema_version` MAJOR on load — MAJOR mismatch triggers error surfaced to writer, not silent degradation. Offer context-only mode as fallback.
 3. Extract: `project.genre_tag`, `gates` (status of each), `artifacts` (paths), `session_mode`, `open_questions`
 4. Load locked gate fields as hard constraints (do not flag prose that complies with locked decisions)
@@ -483,7 +485,7 @@ All entry paths go through writing-guide. prose-editor is never invoked directly
 |---|---|---|
 | Passes 1-2 (structural, character) | Skipped with declaration | Available (Phase 2) |
 | Pass 3 (voice coherence) | Runs if voice profile exists | Runs against voice profile + character voice anchors |
-| Pass 4 (continuity) | Skipped unless ledger exists from prior review | Runs against existing ledger |
+| Pass 4 (continuity) | Skipped unless ledger exists (from story-architect or prior prose-editor review) | Runs against existing ledger |
 | Pass 5 (prose quality) | Full capability | Full capability + genre calibration from handoff |
 | Review artifact header | `entry_mode: context-only` | `entry_mode: post-handoff` |
 
@@ -703,6 +705,8 @@ Before prose-editor can be built, these must exist:
 5. **Direction 3 payload schema in artifact-schemas.md** — Must be added before escalation can be tested
 6. **Two KB leaf guides** — GUIDE.PROSE.AI_PATTERN_DETECTION.md and GUIDE.PROSE.VOICE_CONSISTENCY.md
 7. **ROUTER.REVISION.md update** — New routing entries for the leaf guides
+
+**Sequencing dependency:** This spec references `artifact-schemas.md`, `escalation-triage.md`, and `specialist-routing-guide.md` as existing contracts. These files are defined in the story-architect spec but not yet implemented. If story-architect's implementation produces different schemas than what this spec assumes, the prose-editor spec will need revision. prose-editor implementation should follow story-architect implementation, not precede it.
 
 ---
 
