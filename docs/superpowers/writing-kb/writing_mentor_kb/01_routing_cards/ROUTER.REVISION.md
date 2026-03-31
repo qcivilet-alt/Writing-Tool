@@ -10,3 +10,6 @@ Fetch first:
 Optional:
 - CHK.REVISION.TRIAGE
 - GUIDE.CONTINUITY.KNOWLEDGE_AND_TIMELINE
+- GUIDE.PROSE.AI_PATTERN_DETECTION (when symptom involves AI-sounding prose or generic voice)
+- GUIDE.PROSE.VOICE_CONSISTENCY (when symptom involves lost voice, flat tone, or voice drift)
+- GUIDE.PROSE.SFF_FAILURE_MODES (when genre is speculative fiction and symptom involves infodumping, AYKB dialogue, register breaks, head-hopping, white room, pacing collapse, or subgenre style mismatch)
