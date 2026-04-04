@@ -24,7 +24,7 @@ Writer query arrives at writing-guide
 
 1. **Explicit invocation** -- Writer asks to start a new project, develop an existing idea, or work through a structural problem. writing-guide offers story-architect; writer confirms.
 2. **Toll-gate escalation** -- writing-guide reaches a toll gate and the writer's project has no viable premise on record. writing-guide surfaces the gap and offers to invoke story-architect.
-3. **Session resume** -- Writer returns to an in-progress story-architect session. writing-guide detects the open session artifact (`story-architect-session.json`) and asks if the writer wants to continue from the last completed gate.
+3. **Session resume** -- Writer returns to an in-progress story-architect session. writing-guide detects the project memory file and asks if the writer wants to continue from the last completed gate.
 
 ## 3. Entry Triggers for prose-editor
 
@@ -59,7 +59,7 @@ Example offer:
 ## 6. Session State Detection
 
 **story-architect:**
-- Check for `story-architect-session.json` in the project directory at session start.
+- Check for a project memory file at session start.
 - **Found**: An active story-architect project exists -- surface it and offer resume.
 - **Not found**: No active project -- handle general craft queries normally.
 

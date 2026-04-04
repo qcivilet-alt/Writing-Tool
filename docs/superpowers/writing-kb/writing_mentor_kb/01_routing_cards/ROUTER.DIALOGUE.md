@@ -5,7 +5,17 @@ doc_type: router
 ---
 Use when dialogue feels stiff, expositional, or same-voiced.
 Fetch first:
-- GUIDE.DIALOGUE.SUBTEXT_AND_MULTI_FUNCTION
+
+**Subtext and Multi-function** -- Make dialogue do more than convey surface information.
+
 Optional:
-- CHK.SCENE.DIALOGUE_FUNCTION
-- GUIDE.CHARACTER.AGENCY_AND_DECISION_PRESSURE
+
+**Dialogue Function Checklist:**
+- What does each speaker want?
+- What is being said indirectly?
+- What shifts in power or tension?
+- Does the exchange reveal character?
+- Is any line here only exposition?
+- Do the speakers sound meaningfully different?
+
+**Agency and Decision Pressure** -- Keep the protagonist active in the story's causal chain.

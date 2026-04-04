@@ -8,17 +8,17 @@ Concern-to-pass routing, sub-module selection, escalation payload schemas, and h
 
 ### Concern-to-Pass-to-Sub-Module Routing
 
-| Concern Tag | Passes Activated | Pass 5 Sub-Modules Activated |
+| Concern Tag | Passes Activated | Pass 3 Sub-Modules Activated |
 |---|---|---|
-| `sounds-too-ai` | Pass 5, Pass 3 (Voice Coherence) | AI-ism Detection (full), Diction Audit (compact), Sentence Variation (compact) |
-| `needs-tightening` | Pass 5 | Diction Audit (full), Cliche Scanner (compact), Echo Detection (compact) |
-| `rhythm-off` | Pass 5 | Sentence Variation (full), Echo Detection (compact), Readability/Pacing (if fiction/long-form) |
-| `full-review` | All five passes (1, 2, 3, 4, 5) | All six sub-modules (full reference versions) |
-| `quick-polish` | Pass 5 only | All six sub-modules (compact versions), capped at top 5 findings |
+| `sounds-too-ai` | Pass 3, Pass 1 (Voice Coherence) | AI-ism Detection (full), Diction Audit (compact), Sentence Variation (compact) |
+| `needs-tightening` | Pass 3 | Diction Audit (full), Cliche Scanner (compact), Echo Detection (compact) |
+| `rhythm-off` | Pass 3 | Sentence Variation (full), Echo Detection (compact), Readability/Pacing (if fiction/long-form) |
+| `full-review` | All three passes | All six sub-modules (full reference versions) |
+| `quick-polish` | Pass 3 only | All six sub-modules (compact versions), capped at top 5 findings |
 
 ### Sub-Module Selection Rules
 
-- Load only sub-modules from `prose-lint-modules.md` matching the dispatch concern tag.
+- Load only lint modules from `references/lint/` matching the dispatch concern tag.
 - **Full** = complete sub-module with all checklist items and thresholds.
 - **Compact** = abbreviated version: top 3-5 highest-signal checks only.
 - Unused sub-modules are not processed, preserving context budget.
@@ -78,36 +78,16 @@ prose-editor does NOT:
 ## 3. Handoff Loading Protocol
 
 ### Post-Handoff Entry Flow
-
-**Step 1.** Locate latest `handoff-context-v[N].json` in `docs/writing/[project]/handoff/`. Latest = highest version number N by filename sort.
-
-**Step 2.** Validate `schema_version` MAJOR on load. MAJOR mismatch triggers an error surfaced to the writer, not silent degradation. Offer context-only mode as fallback.
-
-**Step 3.** Extract from the handoff payload:
-- `project.genre_tag`
-- `gates` (status of each)
-- `artifacts` (paths)
-- `session_mode`
-- `open_questions`
-
-**Step 4.** Load locked gate fields as hard constraints. Do not flag prose that complies with locked decisions.
-
-**Step 5.** Load artifact paths. Read on demand per pass, not all at once.
-
-**Step 6.** Surface `open_questions` with `priority: high` to the writer before starting review.
-
-### Handoff Version Determination
-
-Highest N by filename sort of `handoff-context-v[N].json` files in the handoff directory. No timestamp parsing -- pure lexicographic sort on the version number extracted from the filename.
-
-### Schema Version Validation
-
-Compare MAJOR version only. Minor version differences are accepted without warning. Major version mismatch triggers an error with a context-only fallback offer. Context-only mode loads genre, gates, and artifact paths but skips constraint enforcement from gates.
+1. Locate `handoff-context.md` in `docs/writing/[project]/`
+2. Read YAML frontmatter for gates, artifacts, open_questions
+3. Load cleared gate fields as hard constraints
+4. Load artifact paths. Read on demand per pass.
+5. Surface open_questions to the writer before starting review.
 
 ### Edge Cases
 
-**All gates `not_started` or `skipped`:** Proceed with an advisory note that the planning foundation is thin. Treat all findings as advisory or flag severity, never hold. The writer chose to skip planning -- respect that decision while noting the limitation.
+**All gates `not_started`:** Proceed with an advisory note that the planning foundation is thin. Treat all findings as advisory or flag severity, never hold.
 
-**No text provided:** Soft rejection. Prompt the writer to supply text before review can begin. Do not attempt analysis on empty input.
+**No text provided:** Prompt the writer to supply text before review can begin.
 
-**No handoff file found:** Operate without planning context. All passes run in standalone mode. Escalation payloads that reference gate fields are suppressed since there are no gates to conflict with.
+**No handoff file found:** Operate without planning context. All passes run in standalone mode.

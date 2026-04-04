@@ -65,7 +65,7 @@ When invoked with `plan summary` or `gap report`: these are read-only commands. 
 
 **Step 1 — Read memory index.** Check for a project pointer in memory. No pointer found = first session or import flow. Pointer found = proceed to Step 2.
 
-**Step 2 — Read `handoff-context.json`.** Located at the project's artifact root. Missing or unparseable = degraded resume (Tier 1 — see stale artifact tiers below).
+**Step 2 — Read `handoff-context.md`.** Located at the project's artifact root. Missing or unparseable = degraded resume (Tier 1 — see stale artifact tiers below).
 
 **Step 3 — Read `story-manifest.md`.** The canonical plan artifact. Missing = degraded resume (Tier 1).
 
@@ -159,13 +159,13 @@ Upgrade shows what's added and confirms. Downgrade shows what's removed and warn
 INTAKE -> PREMISE LOCK -> CHARACTER COMMITMENT -> STRUCTURE APPROVAL -> CHAPTER DIRECTION -> HANDOFF
 ```
 
-Each gate confirms a category of decisions, produces or updates specific artifacts, and cannot be skipped. Gates exist to create load-bearing dependencies. Skipping a required field means building later decisions on an unstated assumption — plans built on unstated assumptions collapse during drafting.
+Gates are clearance checkpoints, not sequential barriers. Writers can populate any field at any time. The recommended path is shown at intake, but writers may work gates in any order. Request clearance when a gate's fields are resolved. Handoff requires all gates cleared.
 
 ### Gate details
 
 For required fields, severity levels, and KB loading instructions per gate: `Read references/kb-gate-map.md`
 
-**INTAKE** — Confirms: genre tag, working title, initial premise sketch, protagonist sketch. Produces: story-manifest.md stub, handoff-context.json stub. `Read references/kb-gate-map.md#intake-gate`
+**INTAKE** — Confirms: genre tag, working title, initial premise sketch, protagonist sketch. Produces: story-manifest.md stub, handoff-context.md stub. `Read references/kb-gate-map.md#intake-gate`
 
 **PREMISE LOCK** — Confirms: premise (one sentence), core tension, stakes, genre-specific premise fields. Updates: story-manifest.md premise section. `Read references/kb-gate-map.md#premise-lock-gate`
 
@@ -175,7 +175,7 @@ For required fields, severity levels, and KB loading instructions per gate: `Rea
 
 **CHAPTER DIRECTION** — Confirms: chapter-level direction for each unit (purpose, key tension, movement). Produces: chapter direction files. `Read references/kb-gate-map.md#chapter-direction-gate`
 
-**HANDOFF** — Confirms: all prior gates locked, no severity-1 unresolved annotations remain. Finalizes: handoff-context.json, story-manifest.md completion fields. `Read references/kb-gate-map.md#handoff-gate`
+**HANDOFF** — Confirms: all prior gates locked, no severity-1 unresolved annotations remain. Finalizes: handoff-context.md, story-manifest.md completion fields. `Read references/kb-gate-map.md#handoff-gate`
 
 ### Interaction flow within a gate
 
@@ -366,17 +366,6 @@ If the conversation runs long (30+ turns), suggest the writer start a new sessio
 
 ## 13. Session State + Special Protocols
 
-### Session state file
-
-`story-architect-session.json` (transient, not committed) tracks:
-- `active_gate` — current gate
-- `project_slug` — active project identifier
-- `session_mode` — current mode (exploratory/rigorous/workshop)
-- `mode_history` — array of mode changes with timestamps
-- `context_budget_state` — which reference files are currently loaded
-- `last_friction_field` — field the last friction question targeted
-- `last_friction_turn` — turn number of the last friction question
-
 ### Memory index
 
 One memory file per project: `memory/project_[slug].md`. Contains navigation pointers only — no story content. Created at intake, updated at each gate clearance, not deleted on project completion.
@@ -397,4 +386,4 @@ At Character Commitment, for any character whose role indicates a real person, s
 
 ### Handoff notes constraint
 
-`handoff_notes` in handoff-context.json contains factual metadata only: what gates were cleared, what changed since prior handoff, what unresolved annotations remain. No interpretive narrative. No skill-generated characterizations of the writer's story or choices.
+`handoff_notes` in handoff-context.md contains factual metadata only: what gates were cleared, what changed since prior handoff, what unresolved annotations remain. No interpretive narrative. No skill-generated characterizations of the writer's story or choices.

@@ -8,7 +8,7 @@ description: >
   "too wordy", or "needs tightening". Also use when a writer returns with
   revised text for post-edit verification, when writing-guide detects a
   prose-level problem exceeding craft guidance scope, or when story-architect
-  generates a handoff-context.json for prose review. Analyzes submitted text
+  generates a handoff-context.md for prose review. Analyzes submitted text
   through structured diagnostic passes -- never writes prose or generates
   content.
 ---
@@ -35,7 +35,7 @@ All entry paths go through writing-guide. prose-editor is never invoked directly
 Writer pastes prose and requests review. writing-guide detects prose-review need and offers prose-editor. prose-editor receives: submitted text + context-only mode.
 
 ### Path 2: Post-handoff invocation
-story-architect generates `handoff-context.json`. Writer enters prose-editor with full planning context. prose-editor receives: submitted text + handoff-context.json.
+story-architect generates `handoff-context.md`. Writer enters prose-editor with full planning context. prose-editor receives: submitted text + handoff-context.md.
 
 ### Path 3: Diagnostic escalation
 writing-guide or story-architect surfaces a prose-level problem (voice drift, rhythm issue) that exceeds craft guidance scope. prose-editor receives: escalation payload + writer's text.
@@ -43,16 +43,15 @@ writing-guide or story-architect surfaces a prose-level problem (voice drift, rh
 ### Path 4: Session resume
 writing-guide detects incomplete review artifact (`[nn]-[slug]-review.md` with `last_completed_pass` < total passes) and offers to continue from last completed pass. prose-editor receives: partial review artifact + writer's text.
 
+prose-editor runs 3 review passes: Voice Coherence, Continuity Check, Prose Quality.
+
 ### Context-only vs. post-handoff capability
 
 | Capability | Context-Only | Post-Handoff |
 |---|---|---|
-| Passes 1-2 (structural, character) | Skipped with declaration | Available (Phase 2) |
-| Pass 3 (voice coherence) | Runs if voice profile exists | Runs against voice profile + character voice anchors |
-| Pass 4 (continuity) | Skipped unless ledger exists | Runs against existing ledger |
-| Pass 5 (prose quality) | Full capability | Full capability + genre calibration from handoff |
-
-**Quality threshold for context-only mode:** When passes are skipped, the review artifact declares them explicitly: "Passes 1, 2 skipped — no planning artifacts available. This review covers prose quality and voice consistency only."
+| Pass 1 (voice coherence) | Runs if voice profile exists | Runs against voice profile + character voice anchors |
+| Pass 2 (continuity) | Skipped unless ledger exists | Runs against existing ledger |
+| Pass 3 (prose quality) | Full capability | Full capability + genre calibration from handoff |
 
 ---
 
@@ -168,14 +167,19 @@ prose-editor uses 4 reference files loaded on-demand per review phase.
 
 | Reference | Load When | Unload When | Est. Tokens |
 |---|---|---|---|
-| `references/prose-lint-modules.md` | Pass 5 begins (active sub-modules only) | Pass 5 complete | ~800-1500 |
-| `references/voice-profile-protocol.md` | Pass 3 begins or Voice Profile creation | Pass 3 complete | ~700 |
+| `references/lint/lint-ai-ism.md` | Pass 3 (AI-ism sub-module active) | ~150 lines |
+| `references/lint/lint-sentence-variation.md` | Pass 3 (variation sub-module active) | ~60 lines |
+| `references/lint/lint-diction.md` | Pass 3 (diction sub-module active) | ~65 lines |
+| `references/lint/lint-cliche.md` | Pass 3 (cliche sub-module active) | ~50 lines |
+| `references/lint/lint-echo.md` | Pass 3 (echo sub-module active) | ~45 lines |
+| `references/lint/lint-readability.md` | Pass 3 (readability sub-module active) | ~80 lines |
+| `references/voice-profile-protocol.md` | Pass 1 begins or Voice Profile creation | Pass 1 complete | ~700 |
 | `references/review-protocol.md` | Review start + verification pass | Review complete | ~500-1000 |
 | `references/dispatch-and-escalation.md` | Escalation triggered OR intake (dispatch section) | After dispatch/escalation resolved | ~400 |
 
 Reference files load when their pass is active, not at session start.
 
-**Sub-module selection:** For Pass 5, load only the sub-modules from `prose-lint-modules.md` matching the dispatch concern tag. A `sounds-too-ai` review loads AI-ism Detection + Diction Audit sub-modules (~100 lines), not all six.
+**Sub-module selection:** For Pass 3, load only the sub-modules from `references/lint/` matching the dispatch concern tag. A `sounds-too-ai` review loads AI-ism Detection + Diction Audit sub-modules (~100 lines), not all six.
 
 ---
 
@@ -223,7 +227,7 @@ Review artifacts are written to `docs/writing/[project]/chapters/[nn]-[slug]-rev
 - Primary diagnosis: [AI patterns | prose weakness | rhythm | diction | structural | voice drift]
 
 ### Continuity Candidates
-[facts flagged for potential ledger entry — Phase 1: informational only]
+[facts flagged for potential ledger entry — informational only]
 
 ### Pass Notes
 [per-pass observations, skip declarations, checkpoint decisions, write notices/receipts]
@@ -261,7 +265,7 @@ If a finding contains enough information to mechanically produce the fix without
 Two mechanisms prevent prose-editor from generating contradictory or unreliable findings.
 
 ### Cross-pass consistency check
-Before writing findings from Pass N, compare against findings from Passes 1..N-1 for contradictions. If Pass 3 (voice) flags a passage as "too formal" but Pass 5 (prose quality) flags the same passage as "appropriately precise for the genre," surface the contradiction as a note in Pass Notes rather than silently presenting contradictory findings.
+Before writing findings from Pass N, compare against findings from Passes 1..N-1 for contradictions. If Pass 1 (voice) flags a passage as "too formal" but Pass 3 (prose quality) flags the same passage as "appropriately precise for the genre," surface the contradiction as a note in Pass Notes rather than silently presenting contradictory findings.
 
 ### Writer-disputed findings
 When a writer challenges a finding during Issue Triage, the finding is marked "disputed" in the review artifact — not removed. Disputed findings are excluded from the summary's issue count but remain visible for reference. This preserves the diagnostic record while respecting the writer's judgment.
@@ -292,26 +296,6 @@ When writing-guide detects an incomplete review artifact, it offers session resu
 
 ---
 
-## 12. Phase Declarations
+## 12. Capabilities Not Yet Implemented
 
-### Phase 1 (current) — Active Capabilities
-
-- **Pass 3:** Voice Coherence — runs against voice profile (if exists), flags voice drift
-- **Pass 4:** Continuity Check — read-only. Reads existing ledger, flags contradictions as Hold, identifies candidate new facts (listed in review artifact only, never written to ledger)
-- **Pass 5:** Prose Quality — all six sub-modules active via dispatch
-- **Voice Profile:** Both creation paths available (Path A stub, Path B prose-derived)
-- **Post-edit verification:** Full capability (voice drift, meaning drift, over-smoothing, homogenization, inserted AI-isms, overcorrection)
-- **Escalation:** Direction 3 (prose-editor to writing-guide) for voice-drift, continuity-contradiction, and diagnostic triggers
-
-### Phase 2 (future) — Stubbed with Skip Declarations
-
-The following capabilities are declared but not implemented. When dispatch would activate them, they are skipped with an explicit declaration in the review artifact.
-
-- **Pass 1:** Structural Alignment — "Pass 1 skipped: structural alignment checks require Phase 2 implementation."
-- **Pass 2:** Character Consistency — "Pass 2 skipped: character consistency checks require Phase 2 implementation."
-- **Continuity ledger write:** Phase 1 guard prevents writing to continuity-ledger.md. Candidate facts are listed in the review artifact's Continuity Candidates section.
-- **Voice deviation annotations:** Writers cannot yet mark passages as intentional voice departures. All departures are flagged.
-- **`structural-conflict` escalation:** The escalation type is defined in escalation-triage.md but marked "Phase 2 activation."
-- **Handoff version mismatch detection:** Documented in dispatch-and-escalation.md but comparison logic not active.
-
-**Context-only mode quality threshold:** In context-only mode (no planning artifacts), prose-editor provides prose quality and voice consistency analysis. The review artifact declares skipped passes and notes the limited scope. This is a fully valid review — context-only mode is not a degraded experience, it's a focused one.
+Future capabilities are documented in `docs/superpowers/plans/prose-editor-phase2-roadmap.md`. They are not loaded at runtime.

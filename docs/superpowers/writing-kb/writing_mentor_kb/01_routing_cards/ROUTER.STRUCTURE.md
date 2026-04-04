@@ -11,4 +11,5 @@ Then narrow to:
 - GUIDE.STRUCTURE.PINCH_POINTS
 - GUIDE.STRUCTURE.MIDPOINT_SHIFT
 - GUIDE.STRUCTURE.THIRD_PLOT_POINT
-- GUIDE.STRUCTURE.CLIMACTIC_MOMENT
+
+**Climactic Moment** -- Distinguish the final payoff beat from the larger climax sequence. Weiland treats the Climactic Moment as distinct and crucial, and describes its two halves as Sacrifice and Victory/Failure.

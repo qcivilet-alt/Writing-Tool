@@ -28,10 +28,10 @@ Five-pass review logic and post-edit verification reference for the prose-editor
 
 ### Override Rules
 
-- Dispatch can reorder passes based on concern tag. Example: `sounds-too-ai` runs Pass 5 first.
-- Dispatch can skip passes entirely. Example: `quick-polish` runs only Pass 5 in compact mode.
+- Dispatch can reorder passes based on concern tag. Example: `sounds-too-ai` runs Pass 3 first.
+- Dispatch can skip passes entirely. Example: `quick-polish` runs only Pass 3 in compact mode.
 - Passes 1-2 are automatically skipped when no planning artifacts are available.
-- If Pass 5 finds 10+ hold-severity issues, pause and present findings before running further passes.
+- If Pass 3 finds 10+ hold-severity issues, pause and present findings before running further passes.
 
 ### Per-Pass Checkpoint
 
@@ -118,39 +118,25 @@ Grade level is advisory context for severity calibration, not a mechanical gate.
 
 ---
 
-### Pass 1: Structural Alignment
-
-- **What it checks:** Whether chapter events, scene beats, and narrative tensions in the prose match the chapter plan and locked planning gates.
-- **What it loads:** Chapter plan artifact, locked gate definitions, story-architect handoff context (if present).
-- **Calibration:** Fiction and creative nonfiction only. Skip for genres without narrative structure.
-- **Phase 2 dependency:** This pass requires planning artifacts. If unavailable, emit skip declaration.
-
-### Pass 2: Character Consistency
-
-- **What it checks:** Whether character behavior, speech patterns, knowledge, and emotional state are consistent with committed character frames.
-- **What it loads:** Character frame artifacts, character voice anchors, scene context from chapter plan.
-- **Calibration:** Fiction and memoir. Severity escalates for named characters with locked frames.
-- **Phase 2 dependency:** This pass requires character frame artifacts. If unavailable, emit skip declaration.
-
-### Pass 3: Voice Coherence
+### Pass 1: Voice Coherence
 
 - **What it checks:** Whether the prose voice matches the writer's voice profile and any character voice anchors for POV characters.
 - **What it loads:** Voice profile, character voice anchors (for fiction with POV characters).
 - **Calibration:** All genres. Voice drift from the profile is Flag severity by default. Intentional voice shifts within a piece (e.g., tonal modulation) are noted as Advisory.
 
-### Pass 4: Continuity Check
+### Pass 2: Continuity Check
 
 - **What it checks:** Whether facts stated or implied in the prose contradict the continuity ledger. Identifies candidate new facts for ledger addition.
 - **What it loads:** continuity-ledger.md (read-only). See Section 5 for full protocol.
 - **Calibration:** Fiction and memoir primarily. For nonfiction, factual consistency checks apply to claims and data references.
 
-### Pass 5: Prose Quality
+### Pass 3: Prose Quality
 
 - **What it checks:** AI-isms, diction problems, rhythm flatness, cliche density, word/phrase echoes, readability relative to audience, pacing issues.
 - **What it loads:** Voice profile (for baseline comparison), genre and audience from intake context.
 - **Calibration:** All genres. Genre table governs tolerance thresholds.
 
-#### Pass 5 Preamble: Five Diagnostic Questions
+#### Pass 3 Preamble: Five Diagnostic Questions
 
 After dispatch selects sub-modules but before sub-module execution, run these five diagnostic questions against the submitted text:
 
@@ -272,9 +258,9 @@ Every false solution attempts to simulate the artifacts of authenticity without 
 
 ### Skip Condition
 
-If no `continuity-ledger.md` exists in the project context (context-only mode with no prior review history), skip Pass 4 with the following declaration:
+If no `continuity-ledger.md` exists in the project context (context-only mode with no prior review history), skip Pass 2 with the following declaration:
 
-"Pass 4 skipped: no continuity ledger found. Continuity checking requires an established ledger from prior review sessions."
+"Pass 2 skipped: no continuity ledger found. Continuity checking requires an established ledger from prior review sessions."
 
 ### When Ledger Exists
 
@@ -286,7 +272,7 @@ If no `continuity-ledger.md` exists in the project context (context-only mode wi
 ### Continuity Candidates Format
 
 ```
-## Continuity Candidates (Pass 4)
+## Continuity Candidates (Pass 2)
 
 | # | Fact                          | Location | Ledger Category | Confidence |
 |---|-------------------------------|----------|-----------------|------------|
