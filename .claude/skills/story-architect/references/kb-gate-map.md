@@ -19,10 +19,10 @@ All KB paths are relative to: `docs/superpowers/writing-kb/writing_mentor_kb/`
 
 | Gate | KB Files Loaded |
 |---|---|
-| **Premise Lock** | `02_leaf_guides/GUIDE.PREMISE.VIABILITY.md`, `03_checklists/CHK.PREMISE.VIABILITY.md` |
-| **Character Commitment** | `02_leaf_guides/GUIDE.CHARACTER.WANT_NEED_MISBELIEF.md`, `02_leaf_guides/GUIDE.CHARACTER.AGENCY_AND_DECISION_PRESSURE.md` |
-| **Structure Approval** | `02_leaf_guides/GUIDE.STRUCTURE.WEILAND_BEAT_MAP.md`, `02_leaf_guides/GUIDE.STRUCTURE.TWO_HALVES_MAJOR_BEATS.md`, `02_leaf_guides/GUIDE.STRUCTURE.MIDPOINT_SHIFT.md` |
-| **Chapter Direction** | `03_checklists/CHK.SCENE.PURPOSE.md`, `05_dependency_maps/MAP.CONTINUITY.LEDGER_TEMPLATE.md` |
+| **Premise Lock** | `02_leaf_guides/premise/GUIDE.PREMISE.VIABILITY.md`, `03_checklists/premise/CHK.PREMISE.VIABILITY.md` |
+| **Character Commitment** | `02_leaf_guides/character/GUIDE.CHARACTER.WANT_NEED_MISBELIEF.md`, `02_leaf_guides/character/GUIDE.CHARACTER.AGENCY_AND_DECISION_PRESSURE.md` |
+| **Structure Approval** | `02_leaf_guides/structure/GUIDE.STRUCTURE.WEILAND_BEAT_MAP.md`, `02_leaf_guides/structure/GUIDE.STRUCTURE.TWO_HALVES_MAJOR_BEATS.md`, `02_leaf_guides/structure/GUIDE.STRUCTURE.MIDPOINT_SHIFT.md` |
+| **Chapter Direction** | `03_checklists/scene/CHK.SCENE.PURPOSE.md`, `05_dependency_maps/MAP.CONTINUITY.LEDGER_TEMPLATE.md` |
 
 ---
 

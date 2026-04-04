@@ -107,30 +107,28 @@ The `gate_log` section tracks progression through planning gates. Each gate entr
 
 | Status | Meaning |
 |---|---|
-| `not cleared` | Gate has not been attempted. |
-| `in progress` | Gate work is underway. |
-| `cleared: [date]` | Gate passed on the given ISO date. |
-| `revised: [date] (originally cleared: [date])` | Gate was revisited and re-cleared; original clearance date preserved. |
+| `not_started` | Gate has not been attempted. |
+| `in_progress` | Gate work is underway. |
+| `cleared` | Gate passed; fields confirmed. |
+| `revised` | Gate was revisited and re-cleared after changes. |
 
 Example:
 
 ```yaml
 gate_log:
-  premise:
-    status: "cleared: 2026-03-15"
-  structure:
-    status: "in progress"
-  characters:
-    status: "not cleared"
-  world_or_context:
-    status: "not cleared"
-  scene_sequence:
-    status: "not cleared"
-  theme_statement:
-    status: "not cleared"
-  voice_profile:
-    status: "not cleared"
+  intake: not_started
+  premise_lock: cleared
+  character_commitment: in_progress
+  structure_approval: not_started
+  chapter_direction: not_started
+  handoff: not_started
 ```
+
+Note: Earlier versions used 7 keys including `world_or_context`, `theme_statement`, `voice_profile`, and `scene_sequence`. These are now folded into the 6 canonical gates:
+- `world_or_context` → intake gate fields
+- `theme_statement` → premise_lock `thematic_question` field
+- `voice_profile` → character_commitment `voice_anchors` field
+- `scene_sequence` → chapter_direction gate
 
 ### Provenance Tracking in the Manifest
 
@@ -295,25 +293,13 @@ The handoff context is the machine-readable bridge between story-architect and p
     "author_note": "optional, max 300 chars"
   },
   "gates": {
-    "premise": { "status": "locked|provisional|skipped|not_started", "locked_at": "", "note": "" },
-    "structure": { "status": "locked|provisional|skipped|not_started", "locked_at": "", "note": "" },
-    "characters": { "status": "locked|provisional|skipped|not_started", "locked_at": "", "note": "" },
-    "world_or_context": { "status": "locked|provisional|skipped|not_started", "locked_at": "", "note": "" },
-    "scene_sequence": { "status": "locked|provisional|skipped|not_started", "locked_at": "", "note": "" },
-    "theme_statement": { "status": "locked|provisional|skipped|not_started", "locked_at": "", "note": "" },
-    "voice_profile": { "status": "locked|provisional|skipped|not_started", "locked_at": "", "note": "" },
-    "extended": {}
+    "intake": { "status": "not_started|in_progress|cleared|revised", "note": "" },
+    "premise_lock": { "status": "not_started|in_progress|cleared|revised", "note": "" },
+    "character_commitment": { "status": "not_started|in_progress|cleared|revised", "note": "" },
+    "structure_approval": { "status": "not_started|in_progress|cleared|revised", "note": "" },
+    "chapter_direction": { "status": "not_started|in_progress|cleared|revised", "note": "" },
+    "handoff": { "status": "not_started|in_progress|cleared", "note": "" }
   },
-  // NOTE: Gate key mapping — the handoff JSON uses 7 granular keys (from the spec's
-  // prose-editor intake contract) while SKILL.md uses 6 planning gates. The mapping:
-  //   "premise"          ← Premise Lock gate
-  //   "characters"       ← Character Commitment gate
-  //   "structure"        ← Structure Approval gate
-  //   "scene_sequence"   ← Chapter Direction gate
-  //   "world_or_context" ← populated during intake/premise (no dedicated gate)
-  //   "theme_statement"  ← confirmed at Premise Lock (thematic_question field)
-  //   "voice_profile"    ← collected at Character Commitment (voice_anchors field)
-  // story-architect updates these keys when the corresponding gate clears.
   "artifacts": {
     "premise_doc": { "path": "", "format": "", "description": "", "last_modified": "" },
     "outline": { "path": "", "format": "", "description": "", "last_modified": "" },
@@ -343,16 +329,16 @@ Prose-editor must treat these four areas as authoritative:
 3. **`artifacts`** -- file index. Prose-editor loads content from the paths listed here, never from inline data in the handoff block.
 4. **`open_questions` + `gate_surfacing`** -- govern when prose-editor interrupts the writer. When `gate_surfacing` is `silent`, open questions are not surfaced during drafting. When `on_conflict`, only questions relevant to a detected inconsistency are raised. When `always`, all open questions are surfaced at session start.
 
-### Gate Status Values (Handoff Context)
+### Gate Status Values
 
 | Status | Meaning |
 |---|---|
-| `locked` | Gate passed and committed; hard constraint for prose-editor. |
-| `provisional` | Gate addressed but not fully locked; prose-editor may surface conflicts. |
-| `skipped` | Writer explicitly chose to skip this gate. |
 | `not_started` | Gate has not been attempted. |
+| `in_progress` | Gate work is underway. |
+| `cleared` | Gate passed; fields confirmed. Hard constraint for prose-editor. |
+| `revised` | Gate was revisited and re-cleared after changes. |
 
-Note: these status values differ from the gate_log statuses in story-manifest.md. The manifest tracks the planning process; the handoff context communicates constraints to prose-editor.
+Status vocabulary is shared between the manifest gate_log and the handoff context.
 
 ---
 

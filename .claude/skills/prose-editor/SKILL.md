@@ -160,11 +160,7 @@ Describes the direction of a fix without providing replacement text.
 
 ### Severity (issue property)
 
-| Level | Meaning | Review Impact |
-|---|---|---|
-| **Hold** | Contradicts locked artifact, breaks continuity, or produces reader confusion | Blocks review closure — requires writer acknowledgment |
-| **Flag** | Degrades quality but does not create contradictions | Does not block closure |
-| **Advisory** | Stylistic observation; writer may legitimately disagree | Does not block closure |
+See `review-protocol.md#severity-levels` for the full model (Hold / Flag / Advisory + Echo modifier).
 
 ### Intensity (delivery property)
 

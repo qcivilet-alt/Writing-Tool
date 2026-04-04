@@ -272,6 +272,22 @@ Annotations are NOT removed by manual file edits alone. This prevents structural
 
 For exact field schemas, handoff JSON structure, and escalation payloads: `Read references/artifact-schemas.md`
 
+### Cross-Reference Check
+
+After writing any artifact, check whether the changed field is referenced by
+other files. If so, list the related files and offer to update them:
+
+  "Updated [field] in [path].
+   This field is also referenced in:
+     - [related file 1] ([which section])
+     - [related file 2] ([which section])
+   Update these too?"
+
+Common cross-references:
+  - Character fields → story-manifest.md summary, structure-map.md arc notes
+  - Premise fields → character motivation, structure turning points
+  - Structure fields → chapter direction files
+
 ---
 
 ## 8. Anti-Drift Controls

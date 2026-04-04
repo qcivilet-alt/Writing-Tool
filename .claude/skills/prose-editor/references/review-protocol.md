@@ -72,15 +72,14 @@ Location uses the format `P<paragraph>S<sentence>` (e.g., `P3S2` = paragraph 3, 
 
 ### Severity Levels
 
-| Severity | Label   | Meaning                                                                 |
-|----------|---------|-------------------------------------------------------------------------|
-| H        | Hold    | Blocks further work. Must be addressed before subsequent passes.        |
-| F        | Flag    | Significant issue. Should be addressed but does not block.              |
-| A        | Advisory| Worth noting. Writer may accept or dismiss at their discretion.         |
-| O        | Observe | Pattern noted for awareness. No action expected.                        |
-| E        | Echo    | Recurring pattern across multiple locations. Attached to another level. |
+| Severity | Label    | Meaning                                                                 |
+|----------|----------|-------------------------------------------------------------------------|
+| H        | Hold     | Contradicts locked artifact, breaks continuity, or produces reader confusion. Blocks review closure. |
+| F        | Flag     | Degrades quality but does not create contradictions. Does not block.    |
+| A        | Advisory | Stylistic observation; writer may legitimately disagree. Does not block.|
+| E        | Echo     | Modifier -- attaches to H, F, or A to indicate pattern recurs 3+ times.|
 
-Echo (E) is a modifier, not a standalone severity. It attaches to another severity level to indicate the issue recurs. Example: `[A][E]` means an advisory-level issue that appears in multiple places.
+Echo (E) is a modifier, not a standalone severity. Attach to another level: `[F][E]` = recurring Flag.
 
 ### Severity Assignment Rules
 
@@ -137,7 +136,7 @@ Grade level is advisory context for severity calibration, not a mechanical gate.
 
 - **What it checks:** Whether the prose voice matches the writer's voice profile and any character voice anchors for POV characters.
 - **What it loads:** Voice profile, character voice anchors (for fiction with POV characters).
-- **Calibration:** All genres. Voice drift from the profile is Flag severity by default. Intentional voice shifts within a piece (e.g., tonal modulation) are noted as Observe.
+- **Calibration:** All genres. Voice drift from the profile is Flag severity by default. Intentional voice shifts within a piece (e.g., tonal modulation) are noted as Advisory.
 
 ### Pass 4: Continuity Check
 
