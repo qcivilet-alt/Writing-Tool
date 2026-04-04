@@ -38,10 +38,11 @@ Writer query arrives at writing-guide
 - Secondary signal (text length): prose paste >50 words alongside review request
 - Tertiary signal: active handoff + draft question
 
-## 4. Offer Framing
+## 4. Entry Paths
+
+Direct invocation is the fast path for explicit requests (`/story-architect`, `/prose-editor`). writing-guide routing is the discovery path for ambiguous queries.
 
 - Transitions are **offered, not forced** -- the writer can decline any invocation.
-- The writer always starts at writing-guide (single entry surface).
 - Specialist invocations are writer-triggered, not automatic.
 
 Example offer:

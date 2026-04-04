@@ -101,7 +101,7 @@ Severity is **static** per gate x field -- not computed dynamically. Writers kno
 | Genre | Gate Coverage | Notes |
 |---|---|---|
 | **narrative-fiction** | Full coverage across all 4 gates | KB was built primarily for fiction |
-| **memoir** | Partial -- Character Commitment gate thin | `GUIDE.CRAFT.MEMOIRIST_DISTANCE.md` is a **STUB** (not yet written). The "Earned Distance" field uses general resolution criteria as workaround. |
-| **creative-nonfiction** | Partial -- KB guides are fiction-oriented | No dedicated CNF guides exist. Skill evaluates using analogous fiction concepts + genre vocabulary substitution. |
-| **long-form-essay** | Minimal -- most KB backing absent | Essay-specific concepts (Animating Question, Persona, Governing Contradiction) have no dedicated KB guides. Skill relies on `character-frames.md` definitions + general resolution criteria. |
+| **memoir** | Partial -- Character Commitment gate thin | Only narrative-fiction has full KB coverage. Memoir uses general resolution criteria. |
+| **creative-nonfiction** | Partial -- KB guides are fiction-oriented | No dedicated CNF guides exist. |
+| **long-form-essay** | Minimal -- most KB backing absent | Essay-specific concepts have no dedicated KB guides. |
 

@@ -60,15 +60,13 @@ Every pass follows the same execution frame:
 
 ### Finding Output Format
 
-Each finding is a structured record:
-
 ```
-[Pass N] <severity> | <location> | <finding summary>
-  Detail: <explanation of the issue>
-  Suggestion: <concrete revision direction, never a rewrite>
+[Pass N] <severity> | "<identifying quote from the passage>" | <finding summary>
+  Detail: <explanation>
+  Direction: <fix direction, never replacement text>
 ```
 
-Location uses the format `P<paragraph>S<sentence>` (e.g., `P3S2` = paragraph 3, sentence 2). For span-level issues, append word range: `P3S2:W4-7`.
+Use a short identifying quote (5-15 words) from the flagged passage instead of counting paragraphs and sentences. The writer can search their text to find it.
 
 ### Severity Levels
 
@@ -136,19 +134,7 @@ Grade level is advisory context for severity calibration, not a mechanical gate.
 - **What it loads:** Voice profile (for baseline comparison), genre and audience from intake context.
 - **Calibration:** All genres. Genre table governs tolerance thresholds.
 
-#### Pass 3 Preamble: Five Diagnostic Questions
-
-After dispatch selects sub-modules but before sub-module execution, run these five diagnostic questions against the submitted text:
-
-1. **Is anyone home?** -- Can you detect a specific person making specific choices, or could this have been written by anyone about anything?
-2. **Can you see anything?** -- Is the language anchored in visible, physical reality, or does it float in abstraction?
-3. **Does it vary?** -- Do sentence lengths, structures, and rhythms change, or does the prose hum at one frequency?
-4. **Does it take a position?** -- Does the writer commit to a stance, or present permanent hedged neutrality?
-5. **Does anything surprise?** -- Is there a single phrase, image, or structural choice you did not see coming?
-
-**Meta-diagnostic rule:** If all five answers are negative, record a Flag-severity meta-finding: "Passage registers as uniformly weak across all quality dimensions. Consider `full-review` concern tag for comprehensive analysis."
-
-<!-- Source: Paper B S7, "The five diagnostic questions" -->
+See SKILL.md#first-impression for the 5 diagnostic questions (run before any sub-module loads).
 
 ---
 
@@ -205,11 +191,15 @@ Each pass appends its block. Completed passes are never overwritten by later pas
 
 ## 4. Post-Edit Verification Protocol
 
-When a writer returns with revised text after receiving review findings, run the post-edit verification sequence. This protocol is adapted from Toolkit Module 9.
+When a writer returns with revised text, run verification against the original.
 
-### Verification Checks
+### Targeted mode (default for edits touching <5 findings)
+1. Check whether specific flagged patterns were addressed
+2. Scan edited sentences for newly introduced AI-isms
+3. Check for meaning drift in edited passages
 
-Run the following checks in order against the revised text, comparing it to the original submission:
+### Full mode (major revisions or writer request)
+Run all 6 checks:
 
 1. **Voice drift check** -- Compare revised text against the voice profile. Has the revision moved closer to or further from the writer's established voice?
 

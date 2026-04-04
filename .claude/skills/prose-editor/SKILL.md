@@ -29,7 +29,13 @@ Additional prose-editor boundary: prose-editor is a diagnostic lens — it marks
 
 ## 2. Entry Points
 
-All entry paths go through writing-guide. prose-editor is never invoked directly by the writer — writing-guide detects the need and offers prose-editor.
+Two entry paths: direct invocation (`/prose-editor`) or via writing-guide routing.
+
+### Direct invocation
+Writer invokes `/prose-editor` directly with prose and a review request. prose-editor handles its own intake.
+
+### Via writing-guide
+writing-guide detects a prose-review need and offers prose-editor. This is the discovery path for ambiguous queries.
 
 ### Path 1: Explicit invocation
 Writer pastes prose and requests review. writing-guide detects prose-review need and offers prose-editor. prose-editor receives: submitted text + context-only mode.
@@ -61,16 +67,56 @@ Four checkpoints control prose-editor's flow. They are strictly linear — Revie
 
 ### Checkpoint 1: Intake Check
 - **Trigger:** Session start
-- **Writer-facing output:** Collect concern tag, edit mode, genre/audience (if no handoff provides them). Offer Voice Profile creation if none exists.
 - **Required input:** Concern tag selection, edit mode selection
 - **Artifact written:** Review artifact header (intake context block)
 - **Failure path:** No text provided → soft rejection, prompt writer to supply text
+
+#### Intake Inference
+
+Infer defaults from context before asking:
+
+| Signal | Inferred Setting |
+|---|---|
+| Writer says "sounds like AI" | concern: sounds-too-ai, edit: flag-with-diagnostic |
+| Writer says "needs tightening" | concern: needs-tightening, edit: flag-only |
+| Writer says "check the rhythm" | concern: rhythm-off |
+| Writer pastes text with no instruction | concern: full-review |
+| handoff-context.md exists | genre, audience from handoff |
+| voice-profile.md exists | voice profile path set |
+
+Confirm inferred settings: "Running a [concern] review at [intensity]. Sound right?"
+Only prompt for fields that cannot be inferred.
 
 **Concern tags:** `sounds-too-ai` / `needs-tightening` / `rhythm-off` / `full-review` / `quick-polish`
 
 **Edit modes:** `flag-only` (default) / `flag-with-diagnostic` / `flag-with-structural-alternative`
 
 **Intensity:** `gentle` / `standard` (default) / `firm` / `diagnostic` — inherited from session or selected at intake
+
+#### Voice Profile Optionality
+
+Only offer voice profile creation when:
+- Concern tag is `full-review`
+- Writer explicitly asks about voice
+- Session is post-handoff
+
+For `sounds-too-ai`, `needs-tightening`, and `quick-polish`, run without a voice profile. Pass 1 (Voice Coherence) skips with a note: "Voice coherence pass skipped -- no voice profile available. Run with `full-review` to create one."
+
+### First Impression
+
+Before loading any sub-module, run these 5 diagnostic questions against
+the submitted text:
+
+1. **Is anyone home?** — Can you detect a specific person making specific choices, or could this have been written by anyone about anything?
+2. **Can you see anything?** — Is the language anchored in visible, physical reality, or does it float in abstraction?
+3. **Does it vary?** — Do sentence lengths, structures, and rhythms change, or does the prose hum at one frequency?
+4. **Does it take a position?** — Does the writer commit to a stance, or present permanent hedged neutrality?
+5. **Does anything surprise?** — Is there a single phrase, image, or structural choice you did not see coming?
+
+Share the assessment with the writer before granular findings.
+
+If all 5 negative: recommend escalating to full-review regardless of concern tag.
+If all 5 positive: recommend quick-polish (text may only need minor attention).
 
 ### Checkpoint 2: Review Pass (repeats per pass)
 - **Trigger:** Each review pass completes
@@ -163,19 +209,19 @@ See `review-protocol.md#severity-levels` for the full model (Hold / Flag / Advis
 
 prose-editor uses 4 reference files loaded on-demand per review phase.
 
-### Load/Unload Table
+### Loading Table
 
-| Reference | Load When | Unload When | Est. Tokens |
-|---|---|---|---|
-| `references/lint/lint-ai-ism.md` | Pass 3 (AI-ism sub-module active) | ~150 lines |
-| `references/lint/lint-sentence-variation.md` | Pass 3 (variation sub-module active) | ~60 lines |
-| `references/lint/lint-diction.md` | Pass 3 (diction sub-module active) | ~65 lines |
-| `references/lint/lint-cliche.md` | Pass 3 (cliche sub-module active) | ~50 lines |
-| `references/lint/lint-echo.md` | Pass 3 (echo sub-module active) | ~45 lines |
-| `references/lint/lint-readability.md` | Pass 3 (readability sub-module active) | ~80 lines |
-| `references/voice-profile-protocol.md` | Pass 1 begins or Voice Profile creation | Pass 1 complete | ~700 |
-| `references/review-protocol.md` | Review start + verification pass | Review complete | ~500-1000 |
-| `references/dispatch-and-escalation.md` | Escalation triggered OR intake (dispatch section) | After dispatch/escalation resolved | ~400 |
+| Reference | Load When |
+|---|---|
+| `references/review-protocol.md` | Review start |
+| `references/voice-profile-protocol.md` | Pass 1 or Voice Profile creation |
+| `references/dispatch-and-escalation.md` | Intake (dispatch) or escalation |
+| `references/lint/lint-ai-ism.md` | Pass 3, AI-ism sub-module active (~150 lines) |
+| `references/lint/lint-sentence-variation.md` | Pass 3, variation active (~60 lines) |
+| `references/lint/lint-diction.md` | Pass 3, diction active (~65 lines) |
+| `references/lint/lint-cliche.md` | Pass 3, cliche active (~50 lines) |
+| `references/lint/lint-echo.md` | Pass 3, echo active (~45 lines) |
+| `references/lint/lint-readability.md` | Pass 3, readability active (~80 lines) |
 
 Reference files load when their pass is active, not at session start.
 

@@ -141,4 +141,26 @@ Source: Jiang & Hyland 2025 -- engagement markers at 3x lower rate in AI text.
 | Filler phrases | Flag | Critical | Critical |
 | Tonal flatness | -- | Flag | Critical |
 
+### Contextual Examples
+
+**Zombie diction example:**
+  "The team leveraged innovative synergies to navigate the complex landscape."
+  Signal: 4 zombie-diction words in one sentence (leveraged, innovative, synergies, landscape).
+  Direction: Replace abstract nouns with what actually happened; replace vague verbs with specific actions.
+
+**Participial overuse example:**
+  "She opened the door, revealing a vast chamber. He stepped inside, noticing the dust. They moved forward, feeling the weight of centuries."
+  Signal: 3 consecutive sentences using the same trailing participial construction.
+  Direction: Vary sentence structure; let some actions stand alone without the participial tag.
+
+**Hedging/weasel example:**
+  "It could potentially be argued that this may represent a somewhat significant shift in how we might think about the issue."
+  Signal: 5 hedging qualifiers in one sentence (could, potentially, may, somewhat, might).
+  Direction: Identify the actual claim and state it; if uncertainty is the point, name what is uncertain and why.
+
+**Tonal flatness example:**
+  "The meeting was productive. The team discussed several important topics. Progress was made on key initiatives. Everyone left feeling positive about the direction."
+  Signal: Every sentence at the same emotional register, no personality, no specificity.
+  Direction: Find the one moment that mattered and describe it with detail; cut the rest.
+
 <!-- Source: Toolkit Module 1 (base); Paper B S2 (enrichments) -->

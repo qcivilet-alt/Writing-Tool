@@ -31,47 +31,13 @@ See `review-protocol.md#audience-readability-targets` for grade-level targets by
 
 ---
 
-## 2. Escalation Payload Schemas
+## 2. Escalation
 
-Direction 3: prose-editor to writing-guide.
+See `../../shared/escalation-schemas.md` for the unified escalation format.
 
-### Trigger Types
+When multiple escalations trigger in the same pass, holds take priority. Advisory findings are bundled into the review artifact.
 
-| Trigger | Condition | Severity | Routes To |
-|---|---|---|---|
-| `voice-drift` | Sustained voice departure across 3+ passages | Advisory | writing-guide (craft guidance) |
-| `structural-conflict` | Prose contradicts locked gate field | Hold | writing-guide -> writer decision (plan-revise or prose-revise) |
-| `continuity-contradiction` | Prose contradicts established ledger fact | Hold | writing-guide -> writer decision |
-| `diagnostic` | Premise-level problem detected in prose | Hold | writing-guide (Diagnostic mode) |
-
-### JSON Payload Schema
-
-```json
-{
-  "skill": "writing-guide",
-  "trigger": "voice-drift | structural-conflict | continuity-contradiction | diagnostic",
-  "context": {
-    "chapter": "[nn]-[slug]",
-    "conflict_type": "[specific conflict category]",
-    "description": "[factual description, no judgment]",
-    "severity": "hold | flag | advisory",
-    "review_artifact": "[path to review file]",
-    "locked_gate_reference": "[gate name if relevant]"
-  }
-}
-```
-
-### Concurrent Escalation Rule
-
-When multiple escalations are triggered in the same review pass, holds take priority. Hold-severity escalations are emitted as payloads. Advisory-severity findings are bundled into the review artifact but not emitted as separate escalation payloads.
-
-### Scope Boundaries
-
-prose-editor does NOT:
-
-- Modify planning artifacts.
-- Route directly to story-architect (always goes through writing-guide).
-- Resolve conflicts -- presents them for writer decision.
+prose-editor does NOT modify planning artifacts or resolve conflicts — it presents them for writer decision.
 
 ---
 

@@ -38,6 +38,15 @@ A structured story-planning skill that helps writers move from a vague idea to a
 /story-architect gap report         — read-only: all unresolved annotations
 ```
 
+### Genre Support
+
+| Genre | Coverage |
+|---|---|
+| narrative-fiction | Full — KB built primarily for fiction |
+| memoir | Adapted — character commitment gate uses memoir-specific frames |
+| creative-nonfiction | Experimental — no dedicated KB guides, uses fiction analogues + genre vocabulary |
+| long-form-essay | Experimental — essay-specific concepts have no dedicated KB backing |
+
 ### Skill-to-skill parameter schema
 
 ```json
@@ -59,73 +68,17 @@ When invoked with `plan summary` or `gap report`: these are read-only commands. 
 
 ---
 
-## 3. Session Start / Resume
+## 3. Session Resume
 
-### 5-step decision tree
+1. Read `story-manifest.md`
+2. Present:
+   - Gates cleared / in progress / pending
+   - Last position (gate + field)
+   - 1-2 top open questions
 
-**Step 1 — Read memory index.** Check for a project pointer in memory. No pointer found = first session or import flow. Pointer found = proceed to Step 2.
+If story-manifest.md is missing: offer to start fresh or search for artifacts.
 
-**Step 2 — Read `handoff-context.md`.** Located at the project's artifact root. Missing or unparseable = degraded resume (Tier 1 — see stale artifact tiers below).
-
-**Step 3 — Read `story-manifest.md`.** The canonical plan artifact. Missing = degraded resume (Tier 1).
-
-**Step 4 — Evaluate `last_session_status`.** Four possible states:
-- `mid_gate` — writer was answering friction questions when session ended
-- `between_gates` — a gate was cleared, next gate not yet started
-- `project_complete` — handoff gate cleared
-- `intake_incomplete` — intake gate not yet cleared
-
-**Step 5 — Present resume summary.** Writer confirms, changes mode, requests gate revision, or switches project.
-
-### Resume summary template
-
-Populated from artifacts only — never from memory or inference:
-
-```
-STORY-ARCHITECT — Resuming: [Project Title]
-Session [N] · [Mode] · Last active: [relative date]
-
-YOUR STORY SO FAR
-Genre:        [value or "not set"]
-Premise:      [one-sentence or "not established"]
-Protagonist:  [name + phrase or "not developed"]
-Core tension: [value or "not established"]
-
-DEVELOPMENT STATUS
-[check] [Gate]  cleared [date]
-[arrow] [Gate]  IN PROGRESS  <-- last position
-[open]  [Gate]  pending
-
-LAST SESSION
-Worked on:    [1-2 sentences]
-Stopped at:   [gate + step]
-Open threads: - [thread 1]  - [thread 2]  (max 4)
-
-ARTIFACTS ON FILE
-story-manifest.md     present / MISSING
-characters/           [N] files / empty
-structure-map.md      present / MISSING
-chapters/             [N] files / empty
-```
-
-### Stale artifact tiers
-
-- **Tier 1** (story-manifest or handoff-context missing): Halt. Offer: search for files / rebuild from available artifacts / start new project.
-- **Tier 2** (non-critical file missing): Proceed. Flag as MISSING, add to open threads.
-- **Tier 3** (timestamp drift): Flag as potentially stale, reconcile when the affected field becomes relevant.
-- **Tier 4** (parse error): Attempt raw read. Classify as Tier 1 or 2 based on file type.
-
-### Mid-gate resume
-
-Show the exact question that was interrupted and any partial response verbatim. Offer: continue answering / start gate question over / skip (non-required fields only) / abandon gate.
-
-### Mode change on resume
-
-Upgrade shows what the new mode adds and confirms. Downgrade shows what's removed and warns. Mode changes apply prospectively only — never re-run completed gates.
-
-### Multi-project handling
-
-If memory index contains more than one project pointer, always ask the writer to select. Never assume. If one project has `last_session_status == "mid_gate"`, surface that context during selection.
+If memory index contains more than one project pointer, ask the writer to select.
 
 ---
 

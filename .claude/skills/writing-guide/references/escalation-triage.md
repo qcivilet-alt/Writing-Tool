@@ -16,33 +16,11 @@ How writing-guide interprets and routes escalation payloads from specialist modu
 
 **On ghostwriting-risk:** Each module enforces its own anti-ghostwriting constraint locally. A `ghostwriting-risk` escalation is NOT routed to writing-guide for central adjudication -- it is handled at the point of detection. No escalation pathway exists because routing implies the possibility of override; there is none.
 
-## 2. Payload Interpretation Rules
+## 2. Escalation Format
 
-- Escalation payloads arrive as JSON (schema in `story-architect/references/artifact-schemas.md#escalation-payload-schemas`)
-- The `trigger` field determines escalation type
-- The `context` object carries enough information for writing-guide to frame the issue for the writer
-- writing-guide does NOT attempt to resolve escalations internally -- it triages and routes
+See `../../shared/escalation-schemas.md` for the unified escalation format used by all modules.
 
-## 2.5 Direction 3: prose-editor escalates to writing-guide
-
-Escalation payloads from prose-editor follow the Direction 3 schema defined in `story-architect/references/artifact-schemas.md#direction-3`. The payload carries:
-
-```json
-{
-  "skill": "writing-guide",
-  "trigger": "voice-drift | structural-conflict | continuity-contradiction | diagnostic",
-  "context": {
-    "chapter": "[nn]-[slug]",
-    "conflict_type": "[specific conflict category]",
-    "description": "[factual description, no judgment]",
-    "severity": "hold | flag | advisory",
-    "review_artifact": "[path to review file]",
-    "locked_gate_reference": "[gate name if relevant]"
-  }
-}
-```
-
-Runtime reference for payload construction: `prose-editor/references/dispatch-and-escalation.md`.
+writing-guide does NOT attempt to resolve escalations internally -- it triages and routes.
 
 ---
 
@@ -86,8 +64,8 @@ When the writer revises a plan artifact after an escalation, the pipeline does n
 
 1. Writer re-enters story-architect at the relevant gate
 2. story-architect runs gate assessment after writer updates the artifact
-3. story-architect generates `handoff-context-v[N+1].json`
-4. On next prose-editor invocation, it compares loaded context version against latest -- flags mismatch, asks writer to confirm
+3. story-architect updates `handoff-context.md`
+4. On next prose-editor invocation, it reads the updated handoff context
 5. Scoped second pass resumes against confirmed version
 
 This ensures that plan changes propagate forward without requiring a full pipeline restart, while still giving the writer explicit control over version alignment.
