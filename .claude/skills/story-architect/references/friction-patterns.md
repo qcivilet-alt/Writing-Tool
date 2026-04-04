@@ -8,68 +8,23 @@ Dependencies:
 
 ---
 
-## 1. 3-Pass Gap Scan
+## 1. Gap Scan
 
-The skill runs this scan on the accumulated story brief each turn before deciding whether to fire a friction question.
+Before each friction question, scan the required fields for the writer's project:
 
-### Pass 1 — Field Emptiness
+Priority: contradictions > empty fields > underdeveloped fields
+Within each level: Premise > Character > Structure > Theme
+Recency: skip fields addressed in the last 2 turns
+Fire exactly one question per turn.
 
-Each required field has a canonical slot. The scan checks whether the slot is empty, null, or contains only a placeholder phrase.
+A field is "empty" if it contains a placeholder (TBD, "not sure yet",
+"something about", "maybe") or a single word where a sentence is needed.
 
-Placeholder detection uses a blocklist:
+A field is "underdeveloped" if it lacks a complete sentence with specific
+details -- proper nouns, concrete objects, or named relationships.
 
-- `TBD`
-- `not sure yet`
-- `something about`
-- `maybe`
-- Single-word entries for fields requiring a clause
-
-Any match counts as empty for friction purposes.
-
-### Pass 2 — Underdevelopment
-
-A populated field is not necessarily developed. Three sub-checks:
-
-**Clause threshold:** The field must contain at least one subject + verb construction. "Revenge" fails. "The protagonist wants revenge against her father" passes.
-
-**Specificity threshold:** Proper nouns, concrete objects, or named relationships must appear at least once per major character field. Abstract nouns alone do not satisfy this check.
-
-**Internal completeness:** Certain fields require paired sub-fields. For example, `structure` requires both an opening condition and an ending condition. A field with only one half populated counts as underdeveloped.
-
-### Pass 3 — Logical Contradiction
-
-Checks for conflicts between populated fields:
-
-- **Want/Obstacle mismatch:** Stated want has no plausible obstacle.
-- **Stakes/Ending mismatch:** High stated stakes but resolution has no cost.
-- **Theme/Story mismatch:** Stated theme not traceable to any character arc or plot event.
-- **Tone/Structure mismatch:** Light tone with no humor beats or release valves.
-
-Contradictions outrank emptiness in priority. A populated-but-contradictory field is more dangerous than a blank one.
-
----
-
-## 2. Priority and Selection Rule
-
-**Step 1 — Assign severity:**
-
-| Severity Score | Condition |
-|---|---|
-| 3 | Contradiction |
-| 2 | Empty |
-| 1 | Underdeveloped |
-
-**Step 2 — Apply category priority within each severity tier:**
-
-Premise > Character > Structure > Theme
-
-**Step 3 — Apply recency suppression:**
-
-If the writer answered a question about this field in the last two turns, move it to the bottom of the queue regardless of severity.
-
-**Step 4 — Fire exactly one question.**
-
-Take the top item from the ranked list. Log the field and turn number.
+A contradiction exists when two populated fields conflict: want vs. obstacle,
+stakes vs. ending, theme vs. arc, tone vs. structure.
 
 ---
 
@@ -202,44 +157,21 @@ The skill summarizes what emerged from the sprint, identifies any new fields tha
 
 ---
 
-## 8. Gap-to-Gate-Hold Rule
+## 8. Gate Holds
 
-A gap flag becomes a gate hold when ALL THREE conditions are true:
+A gap becomes a gate hold when:
+1. The field is required for the gate being cleared
+2. The session mode is Rigorous or Workshop
+3. The gap is a contradiction or an empty critical field
 
-1. The field is in the required set for the current gate x genre tag.
-2. The session mode is Rigorous or Workshop.
-3. The gap severity is Critical or Structural.
-
-### Mode Behavior
-
-**Exploratory mode:** No gap ever becomes a gate hold. All gaps annotate as `[UNRESOLVED: reason]`.
-
-**Rigorous mode:** Required fields cannot be skipped. The module holds and re-asks.
-
-**Workshop mode:** Gate hold is raised, but a deferral path is available. The writer provides a 6-field justification:
-
-| Field | Description |
-|---|---|
-| `field` | Which field is being deferred |
-| `gate` | Which gate it applies to |
-| `reason_type` | Why the deferral (e.g., `structural-experiment`, `research-needed`) |
-| `reason_statement` | Writer's explanation |
-| `resolution_trigger` | What will resolve this later |
-| `risk_acknowledgment` | What they understand could break |
-
-Deferrals expire at Chapter Direction. A `force_defer` override exists but triggers a session-level warning if invoked more than twice.
+Exploratory mode: no gate holds. Gaps annotate as [UNRESOLVED: reason].
+Workshop mode: holds can be deferred with a one-sentence reason.
 
 ---
 
-## 9. Gap Severity Model
+## 9. Gap Severity
 
-| Severity | Definition | Examples | Rigorous | Workshop |
-|---|---|---|---|---|
-| **Critical** | Absence makes gate's downstream outputs logically undefined | `core_tension`, `act_structure`, `point_of_view_confirmed` | Gate hold, no override | Gate hold; deferral requires `reason_type: structural-experiment` + coherence review |
-| **Structural** | Creates dependency risk — downstream work possible but expensive to fix | `character_arc_type`, `time_structure`, `argument_arc` | Gate hold | Gate hold with deferral path |
-| **Advisory** | Quality signal, not a structural dependency | `cast_necessity_check`, `tonal_consistency_check` | Never a gate hold | Never a gate hold — listed as craft notes |
-
-Severity is assigned from a static gate-map configuration (in `kb-gate-map.md`), not computed dynamically. Writers know in advance which gaps will be critical.
+See `kb-gate-map.md#gap-severity-assignments` for the canonical severity table (Critical / Structural / Advisory).
 
 ---
 

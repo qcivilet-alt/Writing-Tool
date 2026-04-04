@@ -94,10 +94,6 @@ Severity is **static** per gate x field -- not computed dynamically. Writers kno
 | **On handoff** | All artifact paths (index only, not full contents) | When generating `handoff-context.json` |
 | **Never during planning** | `handoff-context.json`, `chapters/[nn]-[slug]-review.md` | These are write-only or prose-editor-facing artifacts |
 
-### 60% Capacity Warning
-
-If the current session context exceeds **60% capacity** with loaded artifacts, the skill surfaces a warning and asks the writer which artifacts to keep vs. unload. It does **not** silently drop files.
-
 ---
 
 ## 6. KB Coverage Gaps
@@ -109,17 +105,3 @@ If the current session context exceeds **60% capacity** with loaded artifacts, t
 | **creative-nonfiction** | Partial -- KB guides are fiction-oriented | No dedicated CNF guides exist. Skill evaluates using analogous fiction concepts + genre vocabulary substitution. |
 | **long-form-essay** | Minimal -- most KB backing absent | Essay-specific concepts (Animating Question, Persona, Governing Contradiction) have no dedicated KB guides. Skill relies on `character-frames.md` definitions + general resolution criteria. |
 
----
-
-## 7. Token Budget Estimates Per Gate
-
-Estimated token load per gate (KB files + relevant reference file sections + always-loaded story-manifest):
-
-| Gate | KB Files (~tokens) | Reference Sections (~tokens) | story-manifest (~tokens) | Total Estimate |
-|---|---|---|---|---|
-| **Premise Lock** | ~2,500 (2 files) | ~800 (artifact-schemas premise fields + friction premise triggers) | ~500 | **~3,800** |
-| **Character Commitment** | ~3,000 (2 files) | ~1,200 (character-frames + friction character triggers) | ~500 | **~4,700** |
-| **Structure Approval** | ~4,500 (3 files) | ~1,000 (friction structure triggers + structure-map schema) | ~500 | **~6,000** |
-| **Chapter Direction** | ~2,000 (2 files) | ~800 (chapter schema + friction triggers subset) | ~500 | **~3,300** |
-
-These are rough estimates. The 60% capacity threshold is based on the model's available context window. With a 200K context window, 60% = ~120K tokens -- well above any single gate load. The risk is **cumulative**: multiple gates' worth of artifacts staying loaded across a long session.

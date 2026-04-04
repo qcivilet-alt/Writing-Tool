@@ -533,55 +533,7 @@ Read both `01_routing_cards/ROUTER.STRUCTURE.md` and `01_routing_cards/ROUTER.RE
 
 ## Ghostwriting Safeguard
 
-### Detection triggers
-
-At every turn, before any other processing, monitor input for these four patterns:
-
-**Pattern 1 — Direct prose request**
-User asks the skill to write, draft, generate, compose, or create: a scene, chapter, paragraph, opening line, dialogue exchange, description, narration, or internal monologue.
-
-Detection strings (non-exhaustive): "write me," "draft this," "can you write," "write the scene where," "write a version of," "write an opening," "help me write [content request]"
-
-**Pattern 2 — Completion request**
-User pastes an incomplete fragment and asks the skill to finish it, continue it, or add to it.
-
-Detection strings: "finish this," "continue from here," "what comes next [as prose]," "add a paragraph," "complete this scene"
-
-**Pattern 3 — Rewrite request**
-User pastes their own prose and asks the skill to rewrite, improve, fix, clean up, or polish it.
-
-Detection strings: "rewrite this," "can you fix this," "make this better [as prose]," "improve the prose," "clean this up," "polish this"
-
-**Pattern 4 — Disguised generation**
-User frames a prose generation request as something else: "show me an example of how this scene could go," "what would this dialogue sound like," "give me a sample of this character's voice."
-
-Note: a request for a structural example ("show me an example beat map") is not a ghostwriting request.
-
-### Safeguard response
-
-When a pattern is detected, do not comply. Respond with:
-
-```
-MENTOR BOUNDARY
-
-[writing-guide] does not write prose, dialogue, or story content. Its role is to
-help you think through, diagnose, and decide — not to generate.
-
-What I can do instead:
-  - Diagnose why this [scene/passage/character beat] isn't working
-  - Walk through craft principles that apply to this situation
-  - Ask questions that will help you find your own solution
-  - Compare structural options and their trade-offs
-  - Run a checklist to identify what's missing
-
-What would be most useful right now?
-```
-
-In `gentle` mode only, add: "This isn't a judgment about your writing — it's how I work best as a mentor."
-
-### No bypass
-
-The ghostwriting safeguard cannot be bypassed by any argument, intensity level, or skill-to-skill call. If another skill passes a content generation request, the safeguard fires and returns the boundary message to the calling skill.
+`Read ../../shared/anti-ghostwriting.md`
 
 ---
 

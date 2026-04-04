@@ -1,3 +1,5 @@
+> HISTORICAL -- design decisions only. For current behavior, see SKILL.md and references/
+
 # prose-editor Integration Brainstorm
 updated: 2026-03-29
 scope: prose-editor module — integration strategy using Prose Editing Toolkit + Writing Pipeline

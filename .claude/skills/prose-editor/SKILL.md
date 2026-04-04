@@ -21,19 +21,9 @@ An editorial review skill that helps writers see what their eye skips — AI-ism
 
 ## 1. Hard Boundaries
 
-These five rules define what prose-editor never does. They cannot be overridden by intensity level, user request, or skill-to-skill invocation.
+`Read ../../shared/anti-ghostwriting.md`
 
-1. **Never write prose, dialogue, or narrative content.** The writer is the author. prose-editor is the diagnostic lens — it marks where the seams show, names why, and points toward the fix. It never holds the red pen.
-
-2. **Never complete sentences or generate replacement text.** Finishing a writer's thought robs them of the cognitive work that produces genuine creative ownership.
-
-3. **Never rewrite the writer's existing prose, even if asked.** Rewriting substitutes the skill's voice for the writer's. Even "improving" prose undermines the writer's relationship with their own material.
-
-4. **Never generate "improved" versions or before/after comparisons.** Generated alternatives are structurally indistinguishable from the writer's own voice, which corrupts the editorial record.
-
-5. **Never decide stylistic choices for the writer — flag, diagnose, describe direction.** The moment the skill picks, the writer stops doing the work of choosing.
-
-These five rules are enforced locally. See Section 9 (Anti-Ghostwriting Enforcement) for detection and response logic.
+Additional prose-editor boundary: prose-editor is a diagnostic lens — it marks where the seams show, names why, and points toward the fix. It never holds the red pen. See Section 9 (Anti-Ghostwriting Enforcement) for detection and response logic.
 
 ---
 
@@ -110,26 +100,10 @@ Four checkpoints control prose-editor's flow. They are strictly linear — Revie
 
 Dispatch maps the writer's stated concern to the minimum effective module set, preventing feedback overload.
 
-### Concern-to-Pass Dispatch Table
+### Dispatch Logic
+See `dispatch-and-escalation.md#concern-to-pass-dispatch-table` for the full concern-to-pass routing.
 
-| Concern Tag | Passes Activated | Pass 5 Sub-Modules |
-|---|---|---|
-| `sounds-too-ai` | Pass 5, Pass 3 | AI-ism Detection (full), Diction Audit (compact), Sentence Variation (compact) |
-| `needs-tightening` | Pass 5 | Diction Audit (full), Cliche Scanner (compact), Echo Detection (compact) |
-| `rhythm-off` | Pass 5 | Sentence Variation (full), Echo Detection (compact), Readability/Pacing (if fiction) |
-| `full-review` | All five passes | All six sub-modules (full) |
-| `quick-polish` | Pass 5 only | All six (compact), capped at top 5 findings |
-
-### Pass 5 Sub-Modules (canonical list)
-
-1. AI-ism Detection
-2. Sentence Variation Analysis
-3. Diction & Specificity Audit
-4. Cliche & Dead Metaphor Scanner
-5. Echo & Repetition Detector
-6. Readability & Pacing Check
-
-**Sub-module selection rule:** Load only sub-modules from `references/prose-lint-modules.md` matching the dispatch concern tag. Unused sub-modules are not processed, preserving context budget.
+Concern tags: `sounds-too-ai`, `needs-tightening`, `rhythm-off`, `full-review`, `quick-polish`.
 
 ---
 
@@ -199,7 +173,7 @@ prose-editor uses 4 reference files loaded on-demand per review phase.
 | `references/review-protocol.md` | Review start + verification pass | Review complete | ~500-1000 |
 | `references/dispatch-and-escalation.md` | Escalation triggered OR intake (dispatch section) | After dispatch/escalation resolved | ~400 |
 
-**Budget rule:** Same 60% capacity threshold as story-architect. If approaching budget, unload completed pass references before loading next pass. Warn writer if budget prevents running all requested passes — offer to prioritize.
+Reference files load when their pass is active, not at session start.
 
 **Sub-module selection:** For Pass 5, load only the sub-modules from `prose-lint-modules.md` matching the dispatch concern tag. A `sounds-too-ai` review loads AI-ism Detection + Diction Audit sub-modules (~100 lines), not all six.
 
@@ -255,7 +229,7 @@ Review artifacts are written to `docs/writing/[project]/chapters/[nn]-[slug]-rev
 [per-pass observations, skip declarations, checkpoint decisions, write notices/receipts]
 ```
 
-**Artifact Write Notice / Write Receipt protocol:** Before writing any artifact, present a Write Notice naming the file and what changed. After writing, present a Write Receipt confirming the file path. Both logged in Pass Notes.
+Write confirmations follow `../../shared/write-protocol.md` -- single-line format after each write.
 
 ---
 

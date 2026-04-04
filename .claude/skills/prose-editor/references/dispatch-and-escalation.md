@@ -24,28 +24,10 @@ Concern-to-pass routing, sub-module selection, escalation payload schemas, and h
 - Unused sub-modules are not processed, preserving context budget.
 
 ### Genre Calibration
+See `review-protocol.md#genre-calibration-table` for genre tolerance, priority, and special rules.
 
-| Genre | Tolerance | Priority | Special Rules |
-|---|---|---|---|
-| Fiction | Fragments, unconventional punctuation, stylistic passive OK | Show-don't-tell checks active; pacing analysis active | Don't flag intentional rule-breaking |
-| Business | Low tolerance for passive, cliches, wordiness | Clarity and concision priority | Skip show-don't-tell |
-| Essay/opinion | Preserve strong voice and personality | Flag hedging aggressively -- opinion needs conviction | Longer sentences OK if earned |
-| Marketing | Very low tolerance for cliches | Specificity and concrete claims priority | Short paragraphs expected |
-| Academic | Passive voice and hedging OK where epistemically appropriate | Clarity and precision over personality | Don't penalize complexity for expert audience |
-
-### Audience Calibration (Readability Targets)
-
-| Audience | Target Grade Level |
-|---|---|
-| Adolescent / young adult | 6-8 |
-| General public | 10-12 |
-| Professional peers | 10-12 |
-| Academic reviewers | 12-16 |
-| No audience specified | 10-12 (default) |
-
-### Calibration Override Rule
-
-Genre and audience override raw readability scores. Do not tell an academic their prose is "too complex" when their audience expects complexity. Readability metrics serve the writer's context, not the other way around.
+### Audience Calibration
+See `review-protocol.md#audience-readability-targets` for grade-level targets by audience.
 
 ---
 

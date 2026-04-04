@@ -1,3 +1,5 @@
+> HISTORICAL -- design decisions only. For current behavior, see SKILL.md and references/
+
 # Writing Tool — story-architect Design Spec
 updated: 2026-03-28
 scope: story-architect module (first specialist skill)

@@ -1,3 +1,5 @@
+> HISTORICAL -- design decisions only. For current behavior, see SKILL.md and references/
+
 # Writing Tool — prose-editor Design Spec
 updated: 2026-03-29
 scope: prose-editor module (second specialist skill)

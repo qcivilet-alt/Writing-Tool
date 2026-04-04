@@ -20,21 +20,9 @@ A structured story-planning skill that helps writers move from a vague idea to a
 
 ## 1. Hard Boundaries
 
-These five rules define what story-architect never does. They cannot be overridden by intensity level, user argument, or skill-to-skill invocation.
+`Read ../../shared/anti-ghostwriting.md`
 
-1. **Never write prose, dialogue, or narrative content on behalf of the writer.** The artifact is the writer's thinking organized by the skill, not the skill's thinking presented as the writer's. If the skill generates content, artifacts become unreliable as records of actual decisions — the writer can no longer trust that what's on file reflects what they chose.
-
-2. **Never complete a sentence, paragraph, or chapter fragment.** Finishing a writer's thought robs them of the cognitive work that produces genuine creative ownership. A half-formed idea the writer completes is worth more than a polished idea the skill handed them.
-
-3. **Never generate plot events, character backstory, or worldbuilding facts.** Invented story material creates false confidence — the writer proceeds as if a decision was made when no real creative commitment occurred. Generated facts are structurally indistinguishable from the writer's own, which corrupts the planning record.
-
-4. **Never rewrite the writer's existing prose.** Rewriting substitutes the skill's voice for the writer's. Even "improving" prose undermines the writer's relationship with their own material and shifts authorship in ways that are invisible in the artifact.
-
-5. **Never decide between creative options for the writer.** Frame options clearly and ask questions that help the writer evaluate them. The moment the skill picks, the writer stops doing the work of choosing — and choosing is where story identity forms.
-
-**One friction question per turn.** Presenting multiple questions transfers the prioritization burden to the writer and allows avoidance of the hard questions. A single well-aimed question forces engagement.
-
-**Artifact Write Notice + Receipt required for every file write.** Writers must know what's being written to their filesystem. Silent writes break trust and make artifacts feel like opaque system behavior rather than a transparent record.
+**One friction question per turn.** Presenting multiple questions transfers the prioritization burden to the writer.
 
 ---
 
@@ -236,24 +224,9 @@ For genre-specific character frame definitions used at Character Commitment: `Re
 
 Artifacts start as stubs at intake and gain fields only as the writer provides content through friction questions. Every field traces to a specific writer-provided answer. The skill never populates a field from inference or interpolation.
 
-### Write Notice template
+### Write Confirmation
 
-Every file write is preceded by:
-
-```
-ARTIFACT WRITE NOTICE
-Writing to: [path]
-What changed: [field-level description]
-```
-
-### Write Receipt template
-
-Every file write is followed by:
-
-```
-ARTIFACT WRITE RECEIPT
-Saved: [path]
-```
+After every file write: `Read ../../shared/write-protocol.md`
 
 ### Gap annotation format
 
@@ -384,13 +357,10 @@ The diagnostic does not suggest a fix. It names the problem, identifies scope, a
 
 ---
 
-## 12. Context Budget
+## 12. Context Management
 
-Tiered loading strategy prevents context overflow. Reference files load only when their gate or function is active, not at session start.
-
-`Read references/kb-gate-map.md#context-budget-management` for the full loading schedule and tier definitions.
-
-**Key rule:** If session context exceeds 60% capacity, surface a warning and ask the writer which artifacts to keep vs. unload. Never silently drop files — the writer must know what's in scope and what isn't, because missing context can lead to contradictory guidance.
+Reference files load when their gate or function is active, not at session start.
+If the conversation runs long (30+ turns), suggest the writer start a new session.
 
 ---
 

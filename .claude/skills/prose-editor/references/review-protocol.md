@@ -175,19 +175,9 @@ Review artifacts are written to disk after each pass completes. This serves two 
 1. **Checkpoint/recovery** -- If the session is interrupted, completed pass results are preserved.
 2. **Accumulated context** -- Later passes can reference earlier findings without re-scanning.
 
-### Write Notice / Write Receipt Protocol
-
-Every disk write follows a two-step confirmation sequence:
-
-1. **Write Notice** (before writing):
-   - State the target file path.
-   - State what will be written (pass number, finding count, artifact type).
-   - Example: "Write Notice: Writing Pass 3 results (7 findings) to `review-artifact-[timestamp].md`."
-
-2. **Write Receipt** (after writing):
-   - Confirm the file path written.
-   - Confirm byte count or line count as verification.
-   - Example: "Write Receipt: `review-artifact-[timestamp].md` updated. Pass 3 block: 42 lines written."
+### Write Confirmation
+After each pass writes findings to the review artifact, confirm with:
+  Saved Pass [N] findings ([count]) to [path].
 
 ### Review Artifact Header
 
