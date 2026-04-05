@@ -71,12 +71,12 @@ Same relative path pattern as `.claude/skills/` — no Read directives need upda
 
 ### Steps
 
-1. Delete old `writing-tool-plugin/skills/` contents (pre-simplification copies)
-2. Copy `.claude/skills/*` into `writing-tool-plugin/skills/`
+1. Delete old `writing-tool-plugin/skills/` contents (pre-simplification copies: `story-architect/` and `writing-guide-routing/`)
+2. Copy `.claude/skills/*` into `writing-tool-plugin/skills/` (note: the old `writing-guide-routing/` is replaced by `writing-guide/` — this is an intentional rename from the simplification)
 3. Copy `.claude/shared/*` into `writing-tool-plugin/shared/`
 4. Delete `.claude/skills/` and `.claude/shared/`
 5. `git add writing-tool-plugin/` — commit plugin to git
-6. Verify Skill tool loads the new versions (restart session, invoke `/story-architect`)
+6. Verify Skill tool loads the new versions (restart session, invoke `/story-architect` and `/prose-editor`)
 
 ### plugin.json Update
 
@@ -86,7 +86,9 @@ Update description to reflect prose-editor availability:
 {
   "name": "writing-tool",
   "description": "Author-led writing ecosystem: story planning (story-architect), editorial review (prose-editor), and craft mentorship (writing-guide). Supports fiction, memoir, CNF, and essay.",
-  "version": "1.1.0"
+  "version": "1.1.0",
+  "author": { "name": "qcivilet-alt" },
+  "repository": "https://github.com/qcivilet-alt/Writing-Tool"
 }
 ```
 
@@ -119,7 +121,7 @@ The following anchors are referenced but don't exist as headings:
 | `kb-gate-map.md#chapter-direction-gate` | story-architect SKILL.md | Add `### Chapter Direction Gate` sub-heading |
 | `kb-gate-map.md#handoff-gate` | story-architect SKILL.md | Add `### Handoff Gate` sub-heading |
 | `dispatch-and-escalation.md#concern-to-pass-dispatch-table` | prose-editor SKILL.md | Add matching heading to dispatch-and-escalation.md |
-| `artifact-schemas.md#escalation-payload-schemas` | story-architect SKILL.md | Update reference to `#escalation-format` (new heading) |
+| `artifact-schemas.md#escalation-payload-schemas` | story-architect SKILL.md, artifact-schemas.md ToC | Rename heading from `## Escalation Format` back to `## Escalation Payload Schemas` to match ToC and SKILL.md references |
 
 ---
 
@@ -212,6 +214,10 @@ After implementation:
 1. `ls writing-tool-plugin/skills/*/SKILL.md` — all 3 skills present
 2. `ls writing-tool-plugin/shared/` — 3 shared files present
 3. `ls .claude/skills/ .claude/shared/` — both deleted (should fail)
-4. Restart Claude Code session, invoke `/story-architect` — verify simplified version loads (check for "clearance checkpoints" language, not "cannot be skipped")
-5. Run the 8 verification checks from the simplification handoff against the new location
-6. Grep for remaining broken anchors across `writing-tool-plugin/`
+4. Validate plugin.json is parseable: `python -c "import json; json.load(open('writing-tool-plugin/.claude-plugin/plugin.json'))"`
+5. Verify Read directive paths resolve: for each skill, check `ls writing-tool-plugin/shared/anti-ghostwriting.md` from the skill's directory
+6. Restart Claude Code session, invoke `/story-architect` — verify simplified version loads (check for "clearance checkpoints" language, not "cannot be skipped")
+7. Invoke `/prose-editor` — verify prose-editor loads from the new location
+8. Run the 8 verification checks from the simplification handoff against the new location
+9. Grep for remaining broken anchors across `writing-tool-plugin/`
+10. Verify old `writing-guide-routing/` directory no longer exists in plugin
