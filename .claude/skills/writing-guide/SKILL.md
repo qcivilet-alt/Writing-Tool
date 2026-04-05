@@ -163,8 +163,6 @@ Check in this order:
 2. `session_intensity` in session state
 3. Default: `standard`
 
-Read `00_control/MODE.INTENSITY_CONTROL.md`
-
 Output: one of `gentle`, `standard`, `firm`, `diagnostic`.
 
 ### Step 4 — Select router
@@ -204,7 +202,7 @@ Checklist mapping:
 |---|---|
 | Premise review | `03_checklists/premise/CHK.PREMISE.VIABILITY.md` |
 | Scene commitment | `03_checklists/scene/CHK.SCENE.PURPOSE.md` |
-| Dialogue review | `03_checklists/scene/CHK.SCENE.DIALOGUE_FUNCTION.md` |
+| Dialogue review | See ROUTER.DIALOGUE.md (inlined) |
 | Revision planning | `03_checklists/revision/CHK.REVISION.TRIAGE.md` |
 | Continuity concern | `03_checklists/continuity/CHK.CONTINUITY.TIMELINE.md` |
 | Representation flag | `03_checklists/representation/CHK.REPRESENTATION.STEREOTYPE_RISK.md` |
@@ -212,7 +210,7 @@ Checklist mapping:
 ### Step 7 — Ripple map (conditional)
 
 Read `05_dependency_maps/MAP.RIPPLE.CORE_CHANGE_MAP.md` only when the Ripple-Effect Review Protocol fires.
-Read `05_dependency_maps/MAP.CONTINUITY.LEDGER_TEMPLATE.md` only when a continuity-specific session is active.
+Continuity ledger template loads only when a continuity-specific session is active.
 
 Never load ripple maps during a standard scene review or premise check.
 
@@ -237,7 +235,7 @@ Typical turn loads 4 to 6 files. Mode files are short control documents and cons
 
 ### Loaded once per session, not per turn
 
-The 4 Mode files (`MODE.STAGE_DETECTION`, `MODE.PROBLEM_CLASSIFIER`, `MODE.INTENSITY_CONTROL`, `MODE.CHECKPOINT_LOGIC`) are read once at session start during dispatch. For subsequent turns, reference them by memory and note "using cached MODE files from session start."
+The 2 Mode files (`MODE.STAGE_DETECTION`, `MODE.PROBLEM_CLASSIFIER`) are read once at session start during dispatch. For subsequent turns, reference them by memory.
 
 ### Leaf guide deduplication
 
@@ -247,11 +245,11 @@ Before reading any KB file, check `guides_loaded_this_session` in session state.
 
 In `gentle` mode: do not load the optional 3rd supplementary leaf guide. Do not load Comparative Memos unless explicitly requested.
 
-In `gentle` and `standard` modes: do not load `MEMO.STRUCTURE.COMPARATIVE_FRAMEWORKS.md` or `MEMO.SHOW_DONT_TELL.EXCEPTIONS.md` unless explicitly requested or the symptom directly maps to them.
+In `gentle` and `standard` modes: do not load comparative memos unless explicitly requested or the symptom directly maps to them.
 
 ### Ripple map gating
 
-`MAP.RIPPLE.CORE_CHANGE_MAP.md` and `MAP.CONTINUITY.LEDGER_TEMPLATE.md` are the most expensive files. Load only when Gate 5 fires or `/writing-guide ripple` is invoked. Never preload speculatively.
+`MAP.RIPPLE.CORE_CHANGE_MAP.md` is the most expensive file. Load only when Gate 5 fires or `/writing-guide ripple` is invoked. Never preload speculatively.
 
 ---
 
@@ -364,8 +362,7 @@ TOLL GATE: Character Commitment
 Before locking [character name]'s arc:
 
 [Read relevant sections from:
-  02_leaf_guides/character/GUIDE.CHARACTER.WANT_NEED_MISBELIEF.md
-  02_leaf_guides/character/GUIDE.CHARACTER.AGENCY_AND_DECISION_PRESSURE.md]
+  02_leaf_guides/character/GUIDE.CHARACTER.WANT_NEED_MISBELIEF.md]
 
 Gate questions:
 - What specific decision in Act 2 forces this character to confront their misbelief?
@@ -485,7 +482,6 @@ Do not proceed to Step 2 until clearly established.
 
 **Step 2 — Load ripple tools**
 Read `05_dependency_maps/MAP.RIPPLE.CORE_CHANGE_MAP.md`
-If a timeline change is involved, also Read `05_dependency_maps/MAP.CONTINUITY.LEDGER_TEMPLATE.md`
 
 **Step 3 — Identify first-order consequences**
 Walk through the change map for the relevant change type. State concretely whether each consequence category is affected.

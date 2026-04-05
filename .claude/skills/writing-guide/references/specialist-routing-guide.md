@@ -29,7 +29,7 @@ Writer query arrives at writing-guide
 ## 3. Entry Triggers for prose-editor
 
 1. **Explicit invocation** -- Writer pastes prose and requests review. writing-guide detects prose-review need and offers prose-editor. Writer confirms.
-2. **Post-handoff invocation** -- story-architect generates `handoff-context.json`. writing-guide surfaces handoff availability; writer confirms.
+2. **Post-handoff invocation** -- story-architect generates `handoff-context.md`. writing-guide surfaces handoff availability; writer confirms.
 3. **Diagnostic escalation** -- writing-guide or story-architect surfaces a prose-level problem (voice drift, rhythm issue) that exceeds craft guidance scope.
 4. **Session resume** -- writing-guide detects incomplete review artifact (`[nn]-[slug]-review.md` with `last_completed_pass` < total passes) and offers to continue from last completed pass.
 

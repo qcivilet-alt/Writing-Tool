@@ -27,7 +27,7 @@ Backed by `GUIDE.CHARACTER.WANT_NEED_MISBELIEF.md`.
 | Concept | Fiction Analogue | Definition | KB Backing |
 |---|---|---|---|
 | **The Wound** | Want | The specific, named injury organizing the narrator's pursuit — not "difficult childhood" but a precise rupture. | GUIDE.CHARACTER.WANT_NEED_MISBELIEF.md (analogue) |
-| **The Reckoning** | Need | What the narrator must confront to reach understanding — often different from what they think they want, only visible in retrospect. | GUIDE.CHARACTER.AGENCY_AND_DECISION_PRESSURE.md |
+| **The Reckoning** | Need | What the narrator must confront to reach understanding — often different from what they think they want, only visible in retrospect. | (inlined into ROUTER.CHARACTER.md) |
 | **The Lie the Self Told** | Misbelief | The survival story the narrator held that organized their behavior and prevented clear sight — must have once been genuinely seductive. | GUIDE.CHARACTER.WANT_NEED_MISBELIEF.md (analogue) |
 | **The Earned Distance** | Arc | The epistemological shift in the narrator's relationship to their own story — not necessarily healing, but changed altitude of seeing. | GUIDE.CRAFT.MEMOIRIST_DISTANCE.md (STUB — not yet written) |
 

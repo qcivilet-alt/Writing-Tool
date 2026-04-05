@@ -15,7 +15,7 @@
 6. [cross-character-relationships.md Schema](#cross-character-relationshipsmd-schema)
 7. [continuity-ledger.md Schema](#continuity-ledgermd-schema)
 8. [chapters/[nn]-[slug].md Schema](#chaptersnnn-slugmd-schema)
-9. [handoff-context.json Schema](#handoff-contextjson-schema)
+9. [handoff-context.md Template](#handoff-contextmd-template)
 10. [Memory Index Entry Template](#memory-index-entry-template)
 12. [Escalation Payload Schemas](#escalation-payload-schemas)
 
@@ -35,9 +35,7 @@ docs/writing/[project-slug]/
 ├── chapters/
 │   ├── [nn]-[slug].md
 │   └── [nn]-[slug]-review.md           (prose-editor output)
-├── handoff/
-│   ├── handoff-context-v1.json
-│   └── handoff-context-v2.json
+├── handoff-context.md
 └── checkpoints/
     └── [YYYY-MM-DD]-manifest.md
 ```

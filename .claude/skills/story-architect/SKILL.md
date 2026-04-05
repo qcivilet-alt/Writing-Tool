@@ -128,7 +128,7 @@ For required fields, severity levels, and KB loading instructions per gate: `Rea
 
 **CHAPTER DIRECTION** — Confirms: chapter-level direction for each unit (purpose, key tension, movement). Produces: chapter direction files. `Read references/kb-gate-map.md#chapter-direction-gate`
 
-**HANDOFF** — Confirms: all prior gates locked, no severity-1 unresolved annotations remain. Finalizes: handoff-context.md, story-manifest.md completion fields. `Read references/kb-gate-map.md#handoff-gate`
+**HANDOFF** — Confirms: all prior gates locked, no Critical-severity unresolved annotations remain. Finalizes: handoff-context.md, story-manifest.md completion fields. `Read references/kb-gate-map.md#handoff-gate`
 
 ### Interaction flow within a gate
 
@@ -140,7 +140,7 @@ For required fields, severity levels, and KB loading instructions per gate: `Rea
 6. **Fail** — answer validation response explains what's missing, same question re-framed.
 7. All required fields resolved — skill signals gate readiness.
 8. Gate prompt: "Ready to lock [gate]?"
-9. Writer confirms — Gate Confirmation — Artifact Write Notice — write — Receipt.
+9. Writer confirms — gate cleared — artifact written (see write-protocol.md).
 10. Gate clearance logged in story-manifest.md. Next gate opens.
 
 ### Genre tag rules

@@ -1,12 +1,12 @@
 # Review Protocol
 
-Five-pass review logic and post-edit verification reference for the prose-editor skill.
+Three-pass review logic and post-edit verification reference for the prose-editor skill.
 
 ---
 
 ## Table of Contents
 
-1. [Five-Pass Review Sequence](#1-five-pass-review-sequence)
+1. [Three-Pass Review Sequence](#1-three-pass-review-sequence)
 2. [Per-Pass Execution Protocol](#2-per-pass-execution-protocol)
 3. [Review Artifact Write Protocol](#3-review-artifact-write-protocol)
 4. [Post-Edit Verification Protocol](#4-post-edit-verification-protocol)
@@ -14,23 +14,22 @@ Five-pass review logic and post-edit verification reference for the prose-editor
 
 ---
 
-## 1. Five-Pass Review Sequence
+## 1. Three-Pass Review Sequence
 
 ### Pass Execution Order
 
-| Pass | Name                  | What It Checks                                                       | Phase              |
-|------|-----------------------|----------------------------------------------------------------------|--------------------|
-| 1    | Structural Alignment  | Chapter events/tensions vs. chapter plan and locked gates            | Phase 2            |
-| 2    | Character Consistency | Character behavior vs. committed character frames                    | Phase 2            |
-| 3    | Voice Coherence       | Prose voice vs. voice profile + character voice anchors              | Phase 1            |
-| 4    | Continuity Check      | Prose facts vs. continuity ledger; flag candidate new facts          | Phase 1 (read-only)|
-| 5    | Prose Quality         | AI-isms, diction, rhythm, cliches, echoes, readability/pacing       | Phase 1            |
+| Pass | Name               | What It Checks                                                  |
+|------|--------------------|-----------------------------------------------------------------|
+| 1    | Voice Coherence    | Prose voice vs. voice profile + character voice anchors         |
+| 2    | Continuity Check   | Prose facts vs. continuity ledger; flag candidate new facts     |
+| 3    | Prose Quality      | AI-isms, diction, rhythm, cliches, echoes, readability/pacing  |
+
+Future passes (Structural Alignment, Character Consistency) are documented in `docs/superpowers/plans/prose-editor-phase2-roadmap.md`.
 
 ### Override Rules
 
 - Dispatch can reorder passes based on concern tag. Example: `sounds-too-ai` runs Pass 3 first.
 - Dispatch can skip passes entirely. Example: `quick-polish` runs only Pass 3 in compact mode.
-- Passes 1-2 are automatically skipped when no planning artifacts are available.
 - If Pass 3 finds 10+ hold-severity issues, pause and present findings before running further passes.
 
 ### Per-Pass Checkpoint
@@ -234,7 +233,7 @@ These checks detect false solutions -- revisions that simulate quality without a
 
 4. **Purple prose as proof of humanity** -- Ornamental language deployed specifically to distinguish the text from AI output. Ornament without purpose is ornament without value regardless of motive. `[A][E]`
 
-5. **Deliberately inserted errors** -- Typos, grammatical mistakes, or awkward constructions introduced to appear human. Performing imperfection is itself a form of inauthenticity. `[O][E]`
+5. **Deliberately inserted errors** -- Typos, grammatical mistakes, or awkward constructions introduced to appear human. Performing imperfection is itself a form of inauthenticity. `[A][E]`
 
 ### Diagnostic Principle
 
