@@ -24,3 +24,9 @@
 - Spec review: APPROVED WITH NOTES (5 moderate issues fixed)
 - Plan review: 2 blocking + 4 moderate issues found and fixed
 - Status: Ready for execution
+
+## [2026-04-05] Writing Tool simplification — 31-task, 4-phase implementation
+- Lane: B
+- Steps: 31 completed (+ Task 0 merge + code review fixes)
+- Verification: pass with caveats (12/12 checks pass; word count target not met due to new feature content; 4 suggestion-level items deferred)
+- Review: dispatched (3 critical + 5 important issues found and fixed; 3 suggestions deferred)
