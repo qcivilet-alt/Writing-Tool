@@ -61,10 +61,10 @@ Each cell lists the fields that **must** be resolved before the gate can pass fo
 
 | Genre | Required Fields |
 |---|---|
-| **narrative-fiction** | `scene_objective`, `point_of_view_confirmed`, `entry_exit_beats`, `tension_raised`, `character_state_delta` |
-| **memoir** | `scene_objective`, `point_of_view_confirmed`, `character_state_delta`, `sensory_anchor` |
-| **creative-nonfiction** | `chapter_argument`, `point_of_view_confirmed`, `factual_research_flag`, `transitional_logic` |
-| **long-form-essay** | `chapter_argument`, `point_of_view_confirmed`, `factual_research_flag`, `transitional_logic` |
+| **narrative-fiction** | `scene_objective`, `pov`, `entry_state`, `exit_state`, `tension_raised`, `character_state_delta` |
+| **memoir** | `scene_objective`, `pov`, `character_state_delta`, `sensory_anchor` |
+| **creative-nonfiction** | `chapter_argument`, `pov`, `factual_research_flag`, `transitional_logic` |
+| **long-form-essay** | `chapter_argument`, `pov`, `factual_research_flag`, `transitional_logic` |
 
 ---
 
@@ -74,7 +74,7 @@ Severity is **static** per gate x field -- not computed dynamically. Writers kno
 
 | Severity | Definition | Examples | Behavior in Rigorous | Behavior in Workshop |
 |---|---|---|---|---|
-| **Critical** | Absence makes gate's downstream outputs logically undefined | `core_tension`, `act_structure`, `point_of_view_confirmed` | Gate hold, no override | Gate hold; deferral requires `reason_type: structural-experiment` + coherence review |
+| **Critical** | Absence makes gate's downstream outputs logically undefined | `core_tension`, `act_structure`, `pov` | Gate hold, no override | Gate hold; deferral requires `reason_type: structural-experiment` + coherence review |
 | **Structural** | Creates dependency risk -- downstream work possible but expensive to fix later | `character_arc_type`, `time_structure`, `argument_arc` | Gate hold | Gate hold with deferral path |
 | **Advisory** | Quality signal, not a structural dependency | `cast_necessity_check`, `tonal_consistency_check` | Never a gate hold | Never a gate hold -- listed as craft notes |
 
