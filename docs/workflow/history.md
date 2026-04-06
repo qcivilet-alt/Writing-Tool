@@ -30,3 +30,9 @@
 - Steps: 31 completed (+ Task 0 merge + code review fixes)
 - Verification: pass with caveats (12/12 checks pass; word count target not met due to new feature content; 4 suggestion-level items deferred)
 - Review: dispatched (3 critical + 5 important issues found and fixed; 3 suggestions deferred)
+
+## [2026-04-05] Deployment migration, UX fixes, schema consistency
+- Lane: B
+- Steps: 7 completed
+- Verification: pass (10/10 checks pass; runtime invocation deferred to post-merge)
+- Review: dispatched (clean, no issues)
