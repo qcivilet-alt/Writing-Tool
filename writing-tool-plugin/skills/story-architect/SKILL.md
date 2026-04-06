@@ -136,7 +136,10 @@ For required fields, severity levels, and KB loading instructions per gate: `Rea
 2. Friction engine runs gap scan on the gate's required fields. `Read references/friction-patterns.md`
 3. First friction question fires on the highest-priority gap.
 4. Writer answers. Skill evaluates against minimum-viable resolution.
-5. **Pass** — field updated in artifact, next gap scanned, next question fires.
+5. **Pass** — field validated.
+5b. **Write checkpoint:** show updated value, offer to save.
+    Writer confirms → write field to artifact + single-line confirmation.
+    Writer defers → field held in conversation, written at gate clearance.
 6. **Fail** — answer validation response explains what's missing, same question re-framed.
 7. All required fields resolved — skill signals gate readiness.
 8. Gate prompt: "Ready to lock [gate]?"
