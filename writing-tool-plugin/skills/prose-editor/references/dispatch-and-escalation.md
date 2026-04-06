@@ -6,7 +6,7 @@ Concern-to-pass routing, sub-module selection, escalation payload schemas, and h
 
 ## 1. Dispatch Map
 
-### Concern-to-Pass-to-Sub-Module Routing
+### Concern-to-Pass Dispatch Table
 
 | Concern Tag | Passes Activated | Pass 3 Sub-Modules Activated |
 |---|---|---|

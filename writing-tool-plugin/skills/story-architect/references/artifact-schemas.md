@@ -142,6 +142,7 @@ The structure map captures the arc-level design of the project.
 | `act_structure` | string | all genres | E.g. "three-act", "four-act", "episodic". |
 | `opening_condition` | string | all genres | State of the world/protagonist at story open. |
 | `ending_type` | string | all genres | E.g. "resolved", "ambiguous", "circular". |
+| `inciting_incident_placed` | string | fiction, memoir | Location of the inciting incident in the act structure. |
 | `midpoint_shift` | string | fiction, memoir | The reversal or escalation at the structural midpoint. |
 | `key_turning_points` | string[] | all genres | Ordered list of major structural beats. |
 | `pacing_notes` | string | all genres | Writer's notes on rhythm, tempo, compression. |
@@ -350,7 +351,7 @@ status: in_planning | handoff_written | drafting
 
 ---
 
-## Escalation Format
+## Escalation Payload Schemas
 
 See `../../shared/escalation-schemas.md` for the unified escalation format used by all modules.
 
