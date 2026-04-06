@@ -30,7 +30,11 @@ All KB paths are relative to: `docs/superpowers/writing-kb/writing_mentor_kb/`
 
 Each cell lists the fields that **must** be resolved before the gate can pass for that genre.
 
-### Premise Lock
+### Intake Gate
+
+Intake confirms: genre tag, working title, premise sketch, protagonist sketch. No required-field table — these are collected conversationally.
+
+### Premise Lock Gate
 
 | Genre | Required Fields |
 |---|---|
@@ -39,7 +43,7 @@ Each cell lists the fields that **must** be resolved before the gate can pass fo
 | **creative-nonfiction** | `core_tension`, `thematic_question`, `narrative_voice` |
 | **long-form-essay** | `core_tension`, `thematic_question`, `narrative_voice`, `argument_claim` |
 
-### Character Commitment
+### Character Commitment Gate
 
 | Genre | Required Fields |
 |---|---|
@@ -48,7 +52,7 @@ Each cell lists the fields that **must** be resolved before the gate can pass fo
 | **creative-nonfiction** | `protagonist_desire`, `protagonist_wound`, `narrator_stance` |
 | **long-form-essay** | `narrator_stance`, `speaker_ethos` |
 
-### Structure Approval
+### Structure Approval Gate
 
 | Genre | Required Fields |
 |---|---|
@@ -57,7 +61,7 @@ Each cell lists the fields that **must** be resolved before the gate can pass fo
 | **creative-nonfiction** | `act_structure`, `section_logic`, `argument_arc` |
 | **long-form-essay** | `act_structure`, `chapter_count_range`, `section_logic`, `argument_arc`, `tonal_consistency_check` |
 
-### Chapter Direction
+### Chapter Direction Gate
 
 | Genre | Required Fields |
 |---|---|
@@ -65,6 +69,10 @@ Each cell lists the fields that **must** be resolved before the gate can pass fo
 | **memoir** | `scene_objective`, `pov`, `character_state_delta`, `sensory_anchor` |
 | **creative-nonfiction** | `chapter_argument`, `pov`, `factual_research_flag`, `transitional_logic` |
 | **long-form-essay** | `chapter_argument`, `pov`, `factual_research_flag`, `transitional_logic` |
+
+### Handoff Gate
+
+Requires all prior gates cleared, no Critical-severity unresolved annotations.
 
 ---
 
