@@ -276,7 +276,7 @@ Review artifacts are written to `docs/writing/[project]/chapters/[nn]-[slug]-rev
 [facts flagged for potential ledger entry — informational only]
 
 ### Pass Notes
-[per-pass observations, skip declarations, checkpoint decisions, write notices/receipts]
+[per-pass observations, skip declarations, checkpoint decisions, write confirmations]
 ```
 
 Write confirmations follow `../../shared/write-protocol.md` -- single-line format after each write.

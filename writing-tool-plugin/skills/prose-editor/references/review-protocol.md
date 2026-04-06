@@ -78,6 +78,8 @@ Use a short identifying quote (5-15 words) from the flagged passage instead of c
 
 Echo (E) is a modifier, not a standalone severity. Attach to another level: `[F][E]` = recurring Flag.
 
+S = Source — modifier indicating the pattern has published research backing. Not a severity level. Informational only. Example: `[A][S]` = advisory finding backed by published research.
+
 ### Severity Assignment Rules
 
 - Default to Advisory unless the issue materially changes meaning (Flag) or introduces a factual contradiction (Hold).
