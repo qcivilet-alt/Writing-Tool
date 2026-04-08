@@ -6,7 +6,10 @@ doc_type: router
 Use when the issue is local to a chapter or scene.
 Fetch first:
 - GUIDE.SCENE.SCENE_AND_SEQUEL
-- GUIDE.SCENE.PURPOSE_AND_TURN
+
+**Scene Purpose and Turn** -- Ensure each scene changes the story, not merely contains activity.
+
 Optional:
 - CHK.SCENE.PURPOSE
-- GUIDE.EXPOSITION.TIMING_AND_RELEVANCE
+
+**Exposition Timing and Relevance** -- Control information release so the reader gets what matters when it matters.
